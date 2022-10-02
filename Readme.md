@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Алёна Полуяненко](https://up.htmlacademy.ru/univer-js3-urfu/1/user/2231365).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Григорьев](https://htmlacademy.ru/profile/fuckhtml).
 
 ---
 

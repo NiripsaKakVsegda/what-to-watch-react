@@ -1,4 +1,4 @@
-import Review, {ReviewInfo} from "../review/review";
+import Review, {ReviewInfo} from '../review/review';
 
 function Reviews(reviewsInfo: ReviewInfo[]): JSX.Element {
   return (

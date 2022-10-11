@@ -13,16 +13,16 @@ const play = {
   href: '#play-s',
   width: 19,
   height: 19
-}
+};
 
 const pause = {
   name: 'Pause',
   href: '#pause',
   width: 14,
   height: 21
-}
+};
 
-function PlayerPage(props: PlayerPageProps, isPause: boolean = false): JSX.Element {
+function PlayerPage(props: PlayerPageProps, isPause = false): JSX.Element {
   const buttonInfo = isPause ? pause : play;
   return (
     <div className="player">

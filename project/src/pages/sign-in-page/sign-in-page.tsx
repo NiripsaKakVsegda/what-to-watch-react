@@ -1,6 +1,6 @@
-import Logo from "../../components/logo/logo";
-import Footer from "../../components/footer/footer";
-import SignInMessage from "../../components/sign-in-message/sign-in-message";
+import Logo from '../../components/logo/logo';
+import Footer from '../../components/footer/footer';
+import SignInMessage from '../../components/sign-in-message/sign-in-message';
 
 export enum SignInType {
   Regular,
@@ -19,13 +19,8 @@ function SignInPage(signInType = SignInType.Regular): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
-          {
-            signInType === SignInType.Error ?
-              SignInMessage('Please enter a valid email address') :
-              signInType === SignInType.Message ?
-                SignInMessage('We can’t recognize this email <br/> and password combination. Please try again.') :
-                null
-          }
+          {signInType === SignInType.Error ? SignInMessage('Please enter a valid email address') : null}
+          {signInType === SignInType.Message ? SignInMessage('We can’t recognize this email <br/> and password combination. Please try again.') : null}
 
           <div className="sign-in__fields">
             <div className={`sign-in__field${signInType === SignInType.Error ? ' sign-in__field--error' : ''}`}>

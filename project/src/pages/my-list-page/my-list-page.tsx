@@ -1,9 +1,8 @@
-import Logo from "../../components/logo/logo";
-import UserBlock from "../../components/user-block/user-block";
-import Footer from "../../components/footer/footer";
-import MoviePage from "../movie-page/movie-page";
-import {MovieCardInfo} from "../../index";
-import FilmCard from "../../components/film-card/film-card";
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import Footer from '../../components/footer/footer';
+import {MovieCardInfo} from '../../index';
+import FilmCard from '../../components/film-card/film-card';
 
 type MyListProps = {
   myMovies: MovieCardInfo[];

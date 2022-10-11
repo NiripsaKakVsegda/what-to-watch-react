@@ -1,6 +1,13 @@
-import {MoviePageProps} from "../../pages/movie-page/movie-page";
+export type OverviewProps = {
+  rating: number;
+  ratingLevel: string;
+  ratingCount: number;
+  aboutFilm: string;
+  director: string;
+  actors: string[];
+}
 
-function Overview(props: MoviePageProps): JSX.Element {
+function Overview(props: OverviewProps): JSX.Element {
   return (
     <>
       <div className="film-rating">
@@ -11,7 +18,7 @@ function Overview(props: MoviePageProps): JSX.Element {
         </p>
       </div>
       <div className="film-card__text">
-        {props.aboutFilm.split('\n').map((part) => <p>{part}</p>)}
+        {<p>{props.aboutFilm}</p>}
 
         <p className="film-card__director"><strong>{`Director: ${props.director}`}</strong></p>
 

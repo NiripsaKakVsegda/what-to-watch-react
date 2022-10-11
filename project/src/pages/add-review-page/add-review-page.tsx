@@ -1,6 +1,6 @@
-import Logo from "../../components/logo/logo";
-import UserBlock from "../../components/user-block/user-block";
-import Rating from "../../components/rating/rating";
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import Rating from '../../components/rating/rating';
 
 type AddReviewProps = {
   backgroundPath: string;
@@ -44,13 +44,12 @@ function AddReviewPage(props: AddReviewProps): JSX.Element {
         <form action="#" className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
-              {Array.from(Array(10), (_, i) => i+1).reverse().map((rate) => Rating(rate))}
+              {Array.from(Array(10), (_, i) => i + 1).reverse().map((rate) => Rating(rate))}
             </div>
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text"
-                      placeholder="Review text"></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>

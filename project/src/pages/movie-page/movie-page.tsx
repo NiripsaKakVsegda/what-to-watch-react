@@ -1,18 +1,18 @@
-import Logo from "../../components/logo/logo";
-import UserBlock from "../../components/user-block/user-block";
-import Footer from "../../components/footer/footer";
-import {MovieCardInfo} from "../../index";
-import FilmCard from "../../components/film-card/film-card";
-import FilmCardButtons from "../../components/film-card-buttons/film-card-buttons";
-import Overview from "../../components/overview/overview";
-import Details, {DetailsProps} from "../../components/details/details";
-import {ReviewInfo} from "../../components/review/review";
-import Reviews from "../../components/reviews/reviews";
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import Footer from '../../components/footer/footer';
+import {MovieCardInfo} from '../../index';
+import FilmCard from '../../components/film-card/film-card';
+import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
+import Overview, {OverviewProps} from '../../components/overview/overview';
+import Details, {DetailsProps} from '../../components/details/details';
+import {ReviewInfo} from '../../components/review/review';
+import Reviews from '../../components/reviews/reviews';
 
 export enum MoviePageType {
-  Overview,
-  Details,
-  Reviews
+  OverviewPage,
+  DetailsPage,
+  ReviewsPage
 }
 
 export type MoviePageProps = {
@@ -22,18 +22,12 @@ export type MoviePageProps = {
   genre: string;
   year: number;
   filmCount: number;
-  movies: MovieCardInfo[];
   similarMovies: MovieCardInfo[];
-  rating: number;
-  ratingLevel: string;
-  ratingCount: number;
-  aboutFilm: string;
-  director: string;
-  actors: string[];
   isInList: boolean;
   moviePageType: MoviePageType;
   detailsProps: DetailsProps;
   reviewsInfo: ReviewInfo[];
+  overviewProps: OverviewProps;
 }
 
 function MoviePage(props: MoviePageProps): JSX.Element {
@@ -70,29 +64,28 @@ function MoviePage(props: MoviePageProps): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img src={props.posterPath} alt={`${props.name} poster`} width="218"
-                   height="327"/>
+                height="327"
+              />
             </div>
 
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className={`film-nav__item${props.moviePageType === MoviePageType.Overview ? ' film-nav__item--active' : ''}`}>
+                  <li className={`film-nav__item${props.moviePageType === MoviePageType.OverviewPage ? ' film-nav__item--active' : ''}`}>
                     <a href="#" className="film-nav__link">Overview</a>
                   </li>
-                  <li className={`film-nav__item${props.moviePageType === MoviePageType.Details ? ' film-nav__item--active' : ''}`}>
+                  <li className={`film-nav__item${props.moviePageType === MoviePageType.DetailsPage ? ' film-nav__item--active' : ''}`}>
                     <a href="#" className="film-nav__link">Details</a>
                   </li>
-                  <li className={`film-nav__item${props.moviePageType === MoviePageType.Reviews ? ' film-nav__item--active' : ''}`}>
+                  <li className={`film-nav__item${props.moviePageType === MoviePageType.ReviewsPage ? ' film-nav__item--active' : ''}`}>
                     <a href="#" className="film-nav__link">Reviews</a>
                   </li>
                 </ul>
               </nav>
 
-              {props.moviePageType === MoviePageType.Overview ?
-                Overview(props) :
-                props.moviePageType === MoviePageType.Details ?
-                  Details(props.detailsProps) : Reviews(props.reviewsInfo)
-              }
+              {props.moviePageType === MoviePageType.OverviewPage ? Overview(props.overviewProps) : null}
+              {props.moviePageType === MoviePageType.DetailsPage ? Details(props.detailsProps) : null}
+              {props.moviePageType === MoviePageType.ReviewsPage ? Reviews(props.reviewsInfo) : null}
 
             </div>
           </div>

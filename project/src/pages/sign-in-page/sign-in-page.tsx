@@ -1,26 +1,30 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import SignInMessage from '../../components/sign-in-message/sign-in-message';
+import { SignInType } from '../../types/sign-in-type.enum';
+import { FC } from 'react';
 
-export enum SignInType {
-  Regular,
-  Error,
-  Message
+type Props = {
+  signInType?: SignInType;
 }
 
-function SignInPage(signInType = SignInType.Regular): JSX.Element {
+const SignInPage: FC<Props> = (props) => {
+  let {signInType} = props;
+  signInType = signInType ?? SignInType.Regular;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        {Logo()}
+        <Logo/>
 
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
-          {signInType === SignInType.Error ? SignInMessage('Please enter a valid email address') : null}
-          {signInType === SignInType.Message ? SignInMessage('We can’t recognize this email <br/> and password combination. Please try again.') : null}
+          {signInType === SignInType.Error ?
+            <SignInMessage message={'Please enter a valid email address'}/> : null}
+          {signInType === SignInType.Message ?
+            <SignInMessage message={'We can’t recognize this email <br/> and password combination. Please try again.'}/> : null}
 
           <div className="sign-in__fields">
             <div className={`sign-in__field${signInType === SignInType.Error ? ' sign-in__field--error' : ''}`}>
@@ -38,9 +42,9 @@ function SignInPage(signInType = SignInType.Regular): JSX.Element {
         </form>
       </div>
 
-      {Footer()}
+      <Footer/>
     </div>
   );
-}
+};
 
 export default SignInPage;

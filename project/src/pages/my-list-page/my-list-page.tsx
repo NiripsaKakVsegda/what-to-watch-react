@@ -1,34 +1,36 @@
+import { FC } from 'react';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
-import {MovieCardInfo} from '../../index';
-import FilmCard from '../../components/film-card/film-card';
+import Movie from '../../components/movie/movie';
+import { MovieInfo } from '../../types/movie-info';
 
-type MyListProps = {
-  myMovies: MovieCardInfo[];
+type Props = {
+  myMovies: MovieInfo[];
 }
 
-function MyListPage(props: MyListProps): JSX.Element {
+const MyListPage: FC<Props> = (props) => {
+  const {myMovies} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        {Logo()}
+        <Logo/>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{props.myMovies.length}</span></h1>
-        {UserBlock()}
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myMovies.length}</span></h1>
+        <UserBlock/>
       </header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {props.myMovies.map((movie) => FilmCard(movie))}
+          {myMovies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name}`}/>)}
         </div>
       </section>
 
-      {Footer()}
+      <Footer/>
     </div>
   );
-}
+};
 
 export default MyListPage;

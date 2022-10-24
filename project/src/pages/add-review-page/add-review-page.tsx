@@ -1,42 +1,44 @@
+import { FC } from 'react';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Rating from '../../components/rating/rating';
 
-type AddReviewProps = {
+type Props = {
   backgroundPath: string;
   name: string;
   posterPath: string;
 }
 
-function AddReviewPage(props: AddReviewProps): JSX.Element {
+const AddReviewPage: FC<Props> = (props) => {
+  const {backgroundPath, name, posterPath} = props;
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={props.backgroundPath} alt={props.name}/>
+          <img src={backgroundPath} alt={name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          {Logo()}
+          <Logo/>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">{props.name}</a>
+                <a href="film-page.html" className="breadcrumbs__link">{name}</a>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <a href="/" className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
           </nav>
 
-          {UserBlock()}
+          <UserBlock/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={props.posterPath} alt={`${props.name} poster`} width="218" height="327"/>
+          <img src={posterPath} alt={`${name} poster`} width="218" height="327"/>
         </div>
       </div>
 
@@ -44,7 +46,7 @@ function AddReviewPage(props: AddReviewProps): JSX.Element {
         <form action="#" className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
-              {Array.from(Array(10), (_, i) => i + 1).reverse().map((rate) => Rating(rate))}
+              {Array.from(Array(10), (_, i) => i + 1).reverse().map((rate) => <Rating rate={rate} key={`rate-${rate}`}/>)}
             </div>
           </div>
 
@@ -60,6 +62,6 @@ function AddReviewPage(props: AddReviewProps): JSX.Element {
 
     </section>
   );
-}
+};
 
 export default AddReviewPage;

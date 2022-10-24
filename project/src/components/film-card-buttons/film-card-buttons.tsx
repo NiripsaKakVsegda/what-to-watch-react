@@ -1,17 +1,14 @@
-const inList = {
-  href: '#in-list',
-  width: 18,
-  height: 14
-};
+import { FC } from 'react';
+import InListButton from '../in-list-button/in-list-button';
 
-const add = {
-  href: '#add',
-  width: 19,
-  height: 20
-};
+type Props = {
+  filmCardCount: number;
+  isInList?: boolean;
+  addReview?: boolean;
+}
 
-function FilmCardButtons(filmCardCount: number, isInList = false, addReview = false): JSX.Element {
-  const buttonType = isInList ? inList : add;
+const FilmCardButtons: FC<Props> = (props) => {
+  const {filmCardCount, addReview, isInList} = props;
   return (
     <div className="film-card__buttons">
       <button className="btn btn--play film-card__button" type="button">
@@ -21,15 +18,13 @@ function FilmCardButtons(filmCardCount: number, isInList = false, addReview = fa
         <span>Play</span>
       </button>
       <button className="btn btn--list film-card__button" type="button">
-        <svg viewBox={`0 0 ${buttonType.width} ${buttonType.height}`} width={buttonType.width} height={buttonType.height}>
-          <use xlinkHref={buttonType.href}></use>
-        </svg>
+        <InListButton isInList={isInList}/>
         <span>My list</span>
         <span className="film-card__count">{filmCardCount}</span>
       </button>
       {addReview ? <a href="add-review.html" className="btn film-card__button">Add review</a> : null}
     </div>
   );
-}
+};
 
 export default FilmCardButtons;

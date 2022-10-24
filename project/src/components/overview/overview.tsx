@@ -1,4 +1,6 @@
-export type OverviewProps = {
+import { FC } from 'react';
+
+type Props = {
   rating: number;
   ratingLevel: string;
   ratingCount: number;
@@ -7,25 +9,26 @@ export type OverviewProps = {
   actors: string[];
 }
 
-function Overview(props: OverviewProps): JSX.Element {
+const Overview: FC<Props> = (props) => {
+  const {rating, ratingLevel, ratingCount, aboutFilm, director, actors} = props;
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{props.rating}</div>
+        <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{props.ratingLevel}</span>
-          <span className="film-rating__count">{`${props.ratingCount} ratings`}</span>
+          <span className="film-rating__level">{ratingLevel}</span>
+          <span className="film-rating__count">{`${ratingCount} ratings`}</span>
         </p>
       </div>
       <div className="film-card__text">
-        {<p>{props.aboutFilm}</p>}
+        {<p>{aboutFilm}</p>}
 
-        <p className="film-card__director"><strong>{`Director: ${props.director}`}</strong></p>
+        <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
 
-        <p className="film-card__starring"><strong>{`Starring: ${props.actors.join(', ')}`}</strong></p>
+        <p className="film-card__starring"><strong>{`Starring: ${actors.join(', ')}`}</strong></p>
       </div>
     </>
   );
-}
+};
 
 export default Overview;

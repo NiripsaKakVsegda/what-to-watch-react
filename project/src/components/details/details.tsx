@@ -1,4 +1,6 @@
-export type DetailsProps = {
+import { FC } from 'react';
+
+type Props = {
   director: string;
   actors: string[];
   duration: number;
@@ -6,20 +8,21 @@ export type DetailsProps = {
   year: number;
 }
 
-function Details(props: DetailsProps): JSX.Element {
-  const hours = Math.round(props.duration / 60);
-  const minutes = props.duration - hours * 60;
+const Details: FC<Props> = (props) => {
+  const {director, actors, duration, genre, year} = props;
+  const hours = Math.round(duration / 60);
+  const minutes = duration - hours * 60;
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{props.director}</span>
+          <span className="film-card__details-value">{director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {props.actors.join(', <br/>')}
+            {actors.join(', <br/>')}
           </span>
         </p>
       </div>
@@ -31,15 +34,15 @@ function Details(props: DetailsProps): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{props.genre}</span>
+          <span className="film-card__details-value">{genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{props.year}</span>
+          <span className="film-card__details-value">{year}</span>
         </p>
       </div>
     </div>
   );
-}
+};
 
 export default Details;

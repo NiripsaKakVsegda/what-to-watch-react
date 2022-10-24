@@ -1,13 +1,20 @@
-import Review, {ReviewInfo} from '../review/review';
+import { FC } from 'react';
+import Review from '../review/review';
+import { ReviewInfo } from '../../types/review-info';
 
-function Reviews(reviewsInfo: ReviewInfo[]): JSX.Element {
+type Props = {
+  reviews: ReviewInfo[];
+}
+
+const Reviews: FC<Props> = (props) => {
+  const {reviews} = props;
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewsInfo.map((review) => Review(review))}
+        {reviews.map((review) => <Review text={review.text} author={review.author} date={review.date} rating={review.rating} key={`review-${review.author}-${review.rating}`}/>)}
       </div>
     </div>
   );
-}
+};
 
 export default Reviews;

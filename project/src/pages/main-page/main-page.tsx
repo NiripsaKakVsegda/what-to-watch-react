@@ -1,53 +1,43 @@
-import FilmCard from '../../components/film-card/film-card';
+import { FC } from 'react';
+import Movie from '../../components/movie/movie';
 import GenreLink from '../../components/genre-link/genre-link';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
-import {MovieCardInfo} from '../../index';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
+import { Genre } from '../../types/genres';
+import { Consts } from '../../types/consts';
 
-type MainPageProps = {
-  name: string;
-  genre: string;
-  year: number;
-  backgroundPath: string;
-  posterPath: string;
-  allGenres: string[];
-  movies: MovieCardInfo[];
-  filmCount: number;
-  isInList: boolean;
-}
-
-function MainPage(props: MainPageProps): JSX.Element {
+const MainPage: FC = () => {
+  const {name, genre, year, backgroundPath, posterPath, movies, filmCount, isInList} = Consts;
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.backgroundPath} alt={props.name}/>
+          <img src={backgroundPath} alt={name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          {Logo()}
+          <Logo/>
 
-          {UserBlock()}
+          <UserBlock/>
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.posterPath} alt={`${props.name} poster`} width="218" height="327"/>
+              <img src={posterPath} alt={`${name} poster`} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.genre}</span>
-                <span className="film-card__year">{props.year}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{year}</span>
               </p>
-
-              {FilmCardButtons(props.filmCount, props.isInList)}
+              <FilmCardButtons filmCardCount={filmCount} isInList={isInList}/>
             </div>
           </div>
         </div>
@@ -57,11 +47,11 @@ function MainPage(props: MainPageProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            {props.allGenres.map((g) => GenreLink(g))}
+            {Object.keys(Genre).map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
           </ul>
 
           <div className="catalog__films-list">
-            {props.movies.map((movie) => FilmCard(movie))}
+            {movies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name}`}/>)}
           </div>
 
           <div className="catalog__more">
@@ -69,10 +59,10 @@ function MainPage(props: MainPageProps): JSX.Element {
           </div>
         </section>
 
-        {Footer()}
+        <Footer/>
       </div>
     </>
   );
-}
+};
 
 export default MainPage;

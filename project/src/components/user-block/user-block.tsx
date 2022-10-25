@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserBlock: FC = () => (
   <ul className="user-block">
@@ -8,7 +9,7 @@ const UserBlock: FC = () => (
       </div>
     </li>
     <li className="user-block__item">
-      <a href="/" className="user-block__link">Sign out</a>
+      <Link to={'/'} className="user-block__link">Sign out</Link>
     </li>
   </ul>
 );

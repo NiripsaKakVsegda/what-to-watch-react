@@ -5,7 +5,8 @@ type Props = {
 }
 
 const SignInMessage: FC<Props> = (props) => {
-  const {message} = props;
+  const { message } = props;
+
   return (
     <div className="sign-in__message">
       <p>{message}</p>

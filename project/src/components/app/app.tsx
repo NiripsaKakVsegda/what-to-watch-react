@@ -8,44 +8,51 @@ import MyListPage from '../../pages/my-list-page/my-list-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
-import { AppRoute } from '../../types/app-route.enum';
 import { AuthStatus } from '../../types/auth-status.enum';
-import { Films } from '../../types/const';
 import { MoviePageType } from '../../types/movie-page.enum';
+import { Film } from '../../types/film';
+import { FindMovieById } from '../../common/find-movie-by-id';
 
-const App: FC = () => {
-  const currentMovie = Films[0];
-  const myMovies = Films.slice(0, 10);
+type Props = {
+  movieId: string;
+  allMovies: Film[];
+  myMovies: Film[];
+}
+
+const App: FC<Props> = (props) => {
+  const { movieId, allMovies, myMovies } = props;
+  const movie = FindMovieById(movieId);
   const isInList = false;
   const moviePageType = MoviePageType.OverviewPage;
   const playerName = 'Transpotting';
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={
-          <MainPage isInList={isInList} filmCount={myMovies.length} allMovies={Films} movie={currentMovie}/>
+        <Route path={'/'} element={
+          <MainPage isInList={isInList} filmCount={myMovies.length} allMovies={allMovies} movieId={movie.id}/>
         }
         />
-        <Route path={AppRoute.Login} element={
+        <Route path={'/login'} element={
           <SignInPage/>
         }
         />
-        <Route path={AppRoute.MyList} element={
+        <Route path={'/mylist'} element={
           <PrivateRoute authStatus={AuthStatus.NoAuth}>
             <MyListPage myMovies={myMovies}/>
           </PrivateRoute>
         }
         />
-        <Route path={AppRoute.Film} element={
-          <MoviePage movie={currentMovie} filmCount={myMovies.length} moviePageType={moviePageType}/>
+        <Route path={'/films/:id'} element={
+          <MoviePage filmCount={myMovies.length} moviePageType={moviePageType}/>
         }
         />
-        <Route path={AppRoute.AddReview} element={
-          <AddReviewPage movie={currentMovie}/>
+        <Route path={'/films/:id/review'} element={
+          <AddReviewPage/>
         }
         />
-        <Route path={AppRoute.Player} element={
-          <PlayerPage movie={currentMovie} playerName={playerName}/>
+        <Route path={'/player/:id'} element={
+          <PlayerPage playerName={playerName}/>
         }
         />
         <Route path="*" element={

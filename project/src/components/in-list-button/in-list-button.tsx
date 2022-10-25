@@ -17,8 +17,9 @@ type Props = {
 }
 
 const InListButton: FC<Props> = (props) => {
-  const {isInList} = props;
+  const { isInList } = props;
   const buttonType = isInList ? inList : add;
+
   return (
     <svg viewBox={`0 0 ${buttonType.width} ${buttonType.height}`} width={buttonType.width} height={buttonType.height}>
       <use xlinkHref={buttonType.href}></use>

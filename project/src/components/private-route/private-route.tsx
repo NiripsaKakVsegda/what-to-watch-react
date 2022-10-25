@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
 import { AuthStatus } from '../../types/auth-status.enum';
-import { AppRoute } from '../../types/app-route.enum';
 
 type PrivateRouteProps = {
   authStatus: AuthStatus;
@@ -13,7 +12,7 @@ function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   return (
     authStatus === AuthStatus.Auth
       ? children
-      : <Navigate to={AppRoute.Login} />
+      : <Navigate to={'/login'} />
   );
 }
 

@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import Review from '../review/review';
-import { Comment } from '../../types/comment';
+import { UserReview } from '../../types/user-review';
 
 type Props = {
-  reviews: Comment[];
+  reviews: UserReview[];
 }
 
 const Reviews: FC<Props> = (props) => {
-  const {reviews} = props;
+  const { reviews } = props;
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

@@ -19,8 +19,9 @@ type Props = {
 }
 
 const PlayButton: FC<Props> = (props) => {
-  const {isPause} = props;
+  const { isPause } = props;
   const buttonInfo = isPause ? pause : play;
+
   return (
     <button type="button" className="player__play">
       <svg viewBox={`0 0 ${buttonInfo.width} ${buttonInfo.height}`} width={buttonInfo.width} height={buttonInfo.height}>

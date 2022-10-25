@@ -24,7 +24,7 @@ const MyListPage: FC<Props> = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {myMovies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name}`}/>)}
+          {myMovies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name.replace(/\s/g, '')}`}/>)}
         </div>
       </section>
 

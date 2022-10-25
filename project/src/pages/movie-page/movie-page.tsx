@@ -9,6 +9,7 @@ import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
 import { ReviewInfo } from '../../types/review-info';
 import { MovieInfo } from '../../types/movie-info';
+import { Duration } from '../../types/duration';
 
 export enum MoviePageType {
   OverviewPage,
@@ -28,7 +29,7 @@ export type Props = {
   moviePageType: MoviePageType;
   director: string;
   actors: string[];
-  duration: number;
+  duration: Duration;
   reviewsInfo: ReviewInfo[];
   rating: number;
   ratingLevel: string;
@@ -107,7 +108,7 @@ const MoviePage: FC<Props> = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarMovies.slice(3).map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name}`}/>)}
+            {similarMovies.slice(3).map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name.replace(/\s/g, '')}`}/>)}
           </div>
         </section>
 

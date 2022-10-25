@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import Review from '../review/review';
-import { ReviewInfo } from '../../types/review-info';
+import { Comment } from '../../types/comment';
 
 type Props = {
-  reviews: ReviewInfo[];
+  reviews: Comment[];
 }
 
 const Reviews: FC<Props> = (props) => {
@@ -11,7 +11,7 @@ const Reviews: FC<Props> = (props) => {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.map((review) => <Review text={review.text} author={review.author} date={review.date} rating={review.rating} key={`review-${review.author}-${review.rating}`}/>)}
+        {reviews.map((review) => <Review review={review} key={`review-${review.author}-${review.rating}`}/>)}
       </div>
     </div>
   );

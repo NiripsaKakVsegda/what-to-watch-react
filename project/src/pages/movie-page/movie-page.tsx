@@ -7,39 +7,19 @@ import FilmCardButtons from '../../components/film-card-buttons/film-card-button
 import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
-import { ReviewInfo } from '../../types/review-info';
-import { MovieInfo } from '../../types/movie-info';
-import { Duration } from '../../types/duration';
-
-export enum MoviePageType {
-  OverviewPage,
-  DetailsPage,
-  ReviewsPage
-}
+import { Film } from '../../types/film';
+import { MoviePageType } from '../../types/movie-page.enum';
 
 export type Props = {
-  backgroundPath: string;
-  posterPath: string;
-  name: string;
-  genre: string;
-  year: number;
+  movie: Film;
   filmCount: number;
-  similarMovies: MovieInfo[];
-  isInList: boolean;
   moviePageType: MoviePageType;
-  director: string;
-  actors: string[];
-  duration: Duration;
-  reviewsInfo: ReviewInfo[];
-  rating: number;
-  ratingLevel: string;
-  ratingCount: number;
-  aboutFilm: string;
+  isInList?: boolean;
 }
 
 const MoviePage: FC<Props> = (props) => {
-  const {backgroundPath, posterPath, name, genre, year, filmCount, similarMovies, isInList,
-    moviePageType, director, actors, duration, reviewsInfo, rating, ratingLevel, ratingCount, aboutFilm} = props;
+  const {movie, filmCount, moviePageType, isInList} = props;
+  const {name, year, backgroundPath, posterPath, reviews, similarMovies, genre} = movie;
   return (
     <>
       <section className="film-card film-card--full">
@@ -92,12 +72,9 @@ const MoviePage: FC<Props> = (props) => {
               </nav>
 
               {moviePageType === MoviePageType.OverviewPage ?
-                <Overview rating={rating} ratingLevel={ratingLevel} ratingCount={ratingCount} aboutFilm={aboutFilm}
-                  director={director} actors={actors}
-                /> : null}
-              {moviePageType === MoviePageType.DetailsPage ?
-                <Details director={director} actors={actors} duration={duration} genre={genre} year={year}/> : null}
-              {moviePageType === MoviePageType.ReviewsPage ? <Reviews reviews={reviewsInfo}/> : null}
+                <Overview movie={movie} /> : null}
+              {moviePageType === MoviePageType.DetailsPage ? <Details movie={movie}/> : null}
+              {moviePageType === MoviePageType.ReviewsPage ? <Reviews reviews={reviews}/> : null}
 
             </div>
           </div>
@@ -108,7 +85,7 @@ const MoviePage: FC<Props> = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarMovies.slice(3).map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name.replace(/\s/g, '')}`}/>)}
+            {similarMovies.slice(3).map((currentMovie) => <Movie movie={currentMovie} key={`movie-${currentMovie.name.replace(/\s/g, '')}`}/>)}
           </div>
         </section>
 

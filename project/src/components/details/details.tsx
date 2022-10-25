@@ -1,16 +1,12 @@
 import { FC } from 'react';
-import { Duration } from '../../types/duration';
+import { Film } from '../../types/film';
 
 type Props = {
-  director: string;
-  actors: string[];
-  duration: Duration;
-  genre: string;
-  year: number;
+  movie: Film;
 }
 
 const Details: FC<Props> = (props) => {
-  const {director, actors, duration, genre, year} = props;
+  const {director, actors, duration, genre, year} = props.movie;
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">

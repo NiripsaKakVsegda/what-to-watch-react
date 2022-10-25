@@ -1,14 +1,12 @@
 import { FC } from 'react';
+import { Comment } from '../../types/comment';
 
 type Props = {
-  text: string;
-  author: string;
-  date: Date;
-  rating: number;
+  review: Comment;
 }
 
 const Review: FC<Props> = (props) => {
-  const {text, author, date, rating} = props;
+  const {text, author, date, rating} = props.review;
   return (
     <div className="review">
       <blockquote className="review__quote">

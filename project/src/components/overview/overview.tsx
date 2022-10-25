@@ -1,16 +1,16 @@
 import { FC } from 'react';
+import { Film } from '../../types/film';
+import { getRating, getRatingString } from '../../common/rating-functions';
 
 type Props = {
-  rating: number;
-  ratingLevel: string;
-  ratingCount: number;
-  aboutFilm: string;
-  director: string;
-  actors: string[];
+  movie: Film;
 }
 
 const Overview: FC<Props> = (props) => {
-  const {rating, ratingLevel, ratingCount, aboutFilm, director, actors} = props;
+  const {description, director, actors, reviews} = props.movie;
+  const rating = getRating(reviews);
+  const ratingLevel = getRatingString(rating);
+  const ratingCount = reviews.length;
   return (
     <>
       <div className="film-rating">
@@ -21,7 +21,7 @@ const Overview: FC<Props> = (props) => {
         </p>
       </div>
       <div className="film-card__text">
-        {<p>{aboutFilm}</p>}
+        {<p>{description}</p>}
 
         <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
 

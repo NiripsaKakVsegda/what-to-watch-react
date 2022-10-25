@@ -1,4 +1,4 @@
-import { ReviewInfo } from '../types/review-info';
+import { Comment } from '../types/comment';
 
 export function getRatingString(rate: number) {
   if (rate > 9.5) {
@@ -14,7 +14,7 @@ export function getRatingString(rate: number) {
   }
 }
 
-export function getRating(reviews: ReviewInfo[]) {
+export function getRating(reviews: Comment[]) {
   return reviews
     .map((review) => review.rating)
     .reduce((prevValue, currentValue) => prevValue + currentValue) / reviews.length;

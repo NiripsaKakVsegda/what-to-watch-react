@@ -6,21 +6,18 @@ import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 import { Genre } from '../../types/genre.enum';
-import { MovieInfo } from '../../types/movie-info';
+import { Film } from '../../types/film';
 
 type Props = {
-  name: string;
-  genre: string;
-  year: number;
-  backgroundPath: string;
-  posterPath: string;
-  movies: MovieInfo[];
+  movie: Film;
+  allMovies: Film[];
   filmCount: number;
   isInList?: boolean;
 }
 
 const MainPage: FC<Props> = (props) => {
-  const {name, genre, year, backgroundPath, posterPath, movies, filmCount, isInList} = props;
+  const {movie, allMovies, filmCount, isInList} = props;
+  const {name, backgroundPath, posterPath, genre, year} = movie;
   return (
     <>
       <section className="film-card">
@@ -62,7 +59,7 @@ const MainPage: FC<Props> = (props) => {
           </ul>
 
           <div className="catalog__films-list">
-            {movies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name.replace(/\s/g, '')}`}/>)}
+            {allMovies.map((currentMovie) => <Movie movie={currentMovie} key={`movie-${currentMovie.name.replace(/\s/g, '')}`}/>)}
           </div>
 
           <div className="catalog__more">

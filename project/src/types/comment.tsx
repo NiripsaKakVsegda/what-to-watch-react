@@ -1,4 +1,4 @@
-export type ReviewInfo = {
+export type Comment = {
   text: string;
   author: string;
   date: Date;

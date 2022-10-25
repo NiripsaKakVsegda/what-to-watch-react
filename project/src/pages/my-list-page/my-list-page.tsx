@@ -3,10 +3,10 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
 import Movie from '../../components/movie/movie';
-import { MovieInfo } from '../../types/movie-info';
+import { Film } from '../../types/film';
 
 type Props = {
-  myMovies: MovieInfo[];
+  myMovies: Film[];
 }
 
 const MyListPage: FC<Props> = (props) => {
@@ -24,7 +24,7 @@ const MyListPage: FC<Props> = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {myMovies.map((movie) => <Movie path={movie.path} name={movie.name} key={`movie-${movie.name}`}/>)}
+          {myMovies.map((movie) => <Movie movie={movie} key={`movie-${movie.name.replace(/\s/g, '')}`}/>)}
         </div>
       </section>
 

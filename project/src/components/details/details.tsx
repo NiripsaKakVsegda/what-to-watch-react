@@ -1,17 +1,12 @@
 import { FC } from 'react';
+import { Film } from '../../types/film';
 
 type Props = {
-  director: string;
-  actors: string[];
-  duration: number;
-  genre: string;
-  year: number;
+  movie: Film;
 }
 
 const Details: FC<Props> = (props) => {
-  const {director, actors, duration, genre, year} = props;
-  const hours = Math.round(duration / 60);
-  const minutes = duration - hours * 60;
+  const {director, actors, duration, genre, year} = props.movie;
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -30,7 +25,7 @@ const Details: FC<Props> = (props) => {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{`${hours}h ${minutes}m`}</span>
+          <span className="film-card__details-value">{`${duration.hours}h ${duration.minutes}m`}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

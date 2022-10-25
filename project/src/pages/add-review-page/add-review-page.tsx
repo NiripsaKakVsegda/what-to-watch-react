@@ -2,15 +2,14 @@ import { FC } from 'react';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Rating from '../../components/rating/rating';
+import { Film } from '../../types/film';
 
 type Props = {
-  backgroundPath: string;
-  name: string;
-  posterPath: string;
+  movie: Film;
 }
 
 const AddReviewPage: FC<Props> = (props) => {
-  const {backgroundPath, name, posterPath} = props;
+  const {backgroundPath, name, posterPath} = props.movie;
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

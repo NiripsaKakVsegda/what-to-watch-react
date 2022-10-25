@@ -1,19 +1,16 @@
 import { FC } from 'react';
 import PlayButton from '../../components/play-button/play-button';
+import { Film } from '../../types/film';
 
 type Props = {
-  posterPath: string;
+  movie: Film;
   playerName: string;
-  duration: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
   isPause?: boolean;
 }
 
 const PlayerPage: FC<Props> = (props) => {
-  const {posterPath, playerName, duration, isPause} = props;
+  const {movie, playerName, isPause} = props;
+  const {posterPath, duration} = movie;
   return (
     <div className="player">
       <video src="#" className="player__video" poster={posterPath}></video>

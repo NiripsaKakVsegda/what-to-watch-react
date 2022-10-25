@@ -3,7 +3,7 @@ import Logo from '../logo/logo';
 
 const Footer: FC = () => (
   <footer className="page-footer">
-    <Logo/>
+    <Logo isFooter/>
 
     <div className="copyright">
       <p>© 2019 What to watch Ltd.</p>

@@ -1,12 +1,12 @@
 import { FC } from 'react';
+import { Film } from '../../types/film';
 
 type Props = {
-  path: string;
-  name: string;
+  movie: Film;
 }
 
 const Movie: FC<Props> = (props) => {
-  const {path, name} = props;
+  const {path, name} = props.movie;
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">

@@ -11,7 +11,7 @@ export type Film = {
   duration: Duration;
   description: string;
   videoPath: string;
-  path: string;
+  cardPath: string;
   posterPath: string;
   backgroundPath: string;
   reviews: UserReview[];

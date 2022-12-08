@@ -22,7 +22,7 @@ const MyListPage: FC<Props> = (props) => {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          {myMovies.map((movie) => <Movie movie={movie}/>)}
+          {myMovies.map((movie) => <Movie movie={movie} key={movie.id}/>)}
         </div>
       </section>
       <Footer/>

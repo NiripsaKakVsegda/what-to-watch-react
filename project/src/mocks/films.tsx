@@ -7,7 +7,6 @@ const actors = [
   'Samanta Klee',
   'Zhin Xiao'
 ];
-const genre = 'Comedy';
 const year = 2022;
 const director = 'Lorem Ipsum';
 const duration: Duration = {
@@ -24,7 +23,7 @@ export const FILMS: Film[] = [
   {
     id: 'the-grand-budapest-hotel',
     name: 'The Grand Budapest Hotel',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -35,12 +34,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'bohemian-rhapsody',
     name: 'Bohemian Rhapsody',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -51,12 +49,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'fantastic-beasts-the-crimes-of-grindelwald',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
-    genre: genre,
+    genre: 'Crime',
     year: year,
     director: director,
     actors: actors,
@@ -67,12 +64,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'macbeth',
     name: 'Macbeth',
-    genre: genre,
+    genre: 'Crime',
     year: year,
     director: director,
     actors: actors,
@@ -83,12 +79,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'aviator',
     name: 'Aviator',
-    genre: genre,
+    genre: 'Crime',
     year: year,
     director: director,
     actors: actors,
@@ -99,12 +94,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'we-need-to-talk-about-kevin',
     name: 'We need to talk about Kevin',
-    genre: genre,
+    genre: 'Crime',
     year: year,
     director: director,
     actors: actors,
@@ -115,12 +109,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'what-we-do-in-the-shadows',
     name: 'What We Do in the Shadows',
-    genre: genre,
+    genre: 'Crime',
     year: year,
     director: director,
     actors: actors,
@@ -131,12 +124,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'revenant',
     name: 'Revenant',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -147,12 +139,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'johnny-english',
     name:'Johnny English',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -163,12 +154,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'shutter-island',
     name: 'Shutter Island',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -179,12 +169,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'pulp-fiction',
     name: 'Pulp Fiction',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -195,12 +184,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'no-country-for-old-men',
     name: 'No Country for Old Men',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -211,12 +199,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'snatch',
     name: 'Snatch',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -227,12 +214,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'moonrise-kingdom',
     name: 'Moonrise Kingdom',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -243,12 +229,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'seven-years-in-tibet',
     name: 'Seven Years in Tibet',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -259,12 +244,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'midnight-special',
     name: 'Midnight Special',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -275,12 +259,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'war-of-the-worlds',
     name: 'War of the Worlds',
-    genre: genre,
+    genre: 'Comedy',
     year: year,
     director: director,
     actors: actors,
@@ -291,12 +274,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'dardjeeling-limited',
     name: 'Dardjeeling Limited',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -307,12 +289,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'orlando',
     name: 'Orlando',
-    genre: genre,
+    genre: 'Thriller',
     year: year,
     director: director,
     actors: actors,
@@ -323,12 +304,11 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   },
   {
     id: 'mindhunter',
     name: 'Mindhunter',
-    genre: genre,
+    genre: 'Drama',
     year: year,
     director: director,
     actors: actors,
@@ -339,7 +319,6 @@ export const FILMS: Film[] = [
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
-    similarMovies: []
   }
 ];
 

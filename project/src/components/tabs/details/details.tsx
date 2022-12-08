@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Film } from '../../types/film';
+import { Film } from '../../../types/film';
 
 type Props = {
   movie: Film;

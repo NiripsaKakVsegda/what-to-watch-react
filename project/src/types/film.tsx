@@ -15,5 +15,4 @@ export type Film = {
   posterPath: string;
   backgroundPath: string;
   reviews: UserReview[];
-  similarMovies: Film[];
 }

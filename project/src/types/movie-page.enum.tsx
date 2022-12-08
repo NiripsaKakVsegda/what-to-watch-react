@@ -1,5 +1,5 @@
 export enum MoviePageType {
-  OverviewPage,
-  DetailsPage,
-  ReviewsPage
+  OverviewPage = 'Overview',
+  DetailsPage = 'Details',
+  ReviewsPage = 'Reviews'
 }

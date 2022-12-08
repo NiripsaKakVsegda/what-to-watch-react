@@ -11,7 +11,7 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { AuthStatus } from '../../types/auth-status.enum';
 import { MoviePageType } from '../../types/movie-page.enum';
 import { Film } from '../../types/film';
-import { FindMovieById } from '../../common/find-movie-by-id';
+import { findMovieById } from '../../common/find-movie-by-id';
 
 type Props = {
   movieId: string;
@@ -21,7 +21,7 @@ type Props = {
 
 const App: FC<Props> = (props) => {
   const { movieId, allMovies, myMovies } = props;
-  const movie = FindMovieById(movieId);
+  const movie = findMovieById(movieId)!;
   const isInList = false;
   const moviePageType = MoviePageType.OverviewPage;
   const playerName = 'Transpotting';
@@ -55,7 +55,7 @@ const App: FC<Props> = (props) => {
           <PlayerPage playerName={playerName}/>
         }
         />
-        <Route path="*" element={
+        <Route path="/404" element={
           <PageNotFound/>
         }
         />

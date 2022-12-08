@@ -2,12 +2,16 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { FindMovieById } from '../../common/find-movie-by-id';
+import { findMovieById } from '../../common/find-movie-by-id';
 import Form from '../../components/form/form';
+import PageNotFound from '../page-not-found/page-not-found';
 
 const AddReviewPage: FC = () => {
   const { id } = useParams();
-  const movie = FindMovieById(id);
+  const movie = findMovieById(id);
+  if (!movie) {
+    return (<PageNotFound></PageNotFound>);
+  }
   const { backgroundPath, name, posterPath } = movie;
 
   return (

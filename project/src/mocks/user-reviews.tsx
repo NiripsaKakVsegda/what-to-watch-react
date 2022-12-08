@@ -1,6 +1,6 @@
 import { UserReview } from '../types/user-review';
 
-export const ReviewsForFilm: UserReview[] = [
+export const REVIEWS: UserReview[] = [
   {
     text: 'Awesome film!',
     author: 'niripsa',

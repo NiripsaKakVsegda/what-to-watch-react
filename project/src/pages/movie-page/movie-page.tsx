@@ -9,7 +9,8 @@ import Overview from '../../components/overview/overview';
 import Details from '../../components/details/details';
 import Reviews from '../../components/reviews/reviews';
 import { MoviePageType } from '../../types/movie-page.enum';
-import { FindMovieById } from '../../common/find-movie-by-id';
+import { findMovieById } from '../../common/find-movie-by-id';
+import PageNotFound from '../page-not-found/page-not-found';
 
 export type Props = {
   filmCount: number;
@@ -21,7 +22,10 @@ const MoviePage: FC<Props> = (props) => {
   const { filmCount, moviePageType, isInList } = props;
   const { id } = useParams();
   const [pageType, setPageType] = useState(moviePageType);
-  const movie = FindMovieById(id);
+  const movie = findMovieById(id);
+  if (!movie) {
+    return (<PageNotFound></PageNotFound>);
+  }
   const { name, year, backgroundPath, posterPath, reviews, similarMovies, genre } = movie;
 
   return (

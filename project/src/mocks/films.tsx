@@ -1,6 +1,6 @@
 import { Duration } from '../types/duration';
 import { Film } from '../types/film';
-import { ReviewsForFilm } from './user-reviews';
+import { REVIEWS } from './user-reviews';
 
 const actors = [
   'Jhun Li',
@@ -20,7 +20,7 @@ const posterPath = 'img/the-grand-budapest-hotel-poster.jpg';
 const backgroundPath = 'img/bg-the-grand-budapest-hotel.jpg';
 const videoPath = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
 
-export const Films: Film[] = [
+export const FILMS: Film[] = [
   {
     id: 'the-grand-budapest-hotel',
     name: 'The Grand Budapest Hotel',
@@ -34,7 +34,7 @@ export const Films: Film[] = [
     path: 'img/bg-the-grand-budapest-hotel.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -50,7 +50,7 @@ export const Films: Film[] = [
     path: 'img/bohemian-rhapsody.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -66,7 +66,7 @@ export const Films: Film[] = [
     path: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -82,7 +82,7 @@ export const Films: Film[] = [
     path: 'img/macbeth.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -98,7 +98,7 @@ export const Films: Film[] = [
     path: 'img/aviator.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -114,7 +114,7 @@ export const Films: Film[] = [
     path: 'img/we-need-to-talk-about-kevin.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -130,7 +130,7 @@ export const Films: Film[] = [
     path: 'img/what-we-do-in-the-shadows.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -146,7 +146,7 @@ export const Films: Film[] = [
     path: 'img/revenant.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -162,7 +162,7 @@ export const Films: Film[] = [
     path: 'img/johnny-english.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -178,7 +178,7 @@ export const Films: Film[] = [
     path: 'img/shutter-island.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -194,7 +194,7 @@ export const Films: Film[] = [
     path: 'img/pulp-fiction.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -210,7 +210,7 @@ export const Films: Film[] = [
     path: 'img/no-country-for-old-men.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -226,7 +226,7 @@ export const Films: Film[] = [
     path: 'img/snatch.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -242,7 +242,7 @@ export const Films: Film[] = [
     path: 'img/moonrise-kingdom.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -258,7 +258,7 @@ export const Films: Film[] = [
     path: 'img/seven-years-in-tibet.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -274,7 +274,7 @@ export const Films: Film[] = [
     path: 'img/midnight-special.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -290,7 +290,7 @@ export const Films: Film[] = [
     path: 'img/war-of-the-worlds.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -306,7 +306,7 @@ export const Films: Film[] = [
     path: 'img/dardjeeling-limited.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -322,7 +322,7 @@ export const Films: Film[] = [
     path: 'img/orlando.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   },
   {
@@ -338,7 +338,7 @@ export const Films: Film[] = [
     path: 'img/mindhunter.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
-    reviews: ReviewsForFilm,
+    reviews: REVIEWS,
     similarMovies: []
   }
 ];

@@ -7,7 +7,8 @@ import Footer from '../../components/footer/footer';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 import { Genre } from '../../types/genre.enum';
 import { Film } from '../../types/film';
-import { FindMovieById } from '../../common/find-movie-by-id';
+import { findMovieById } from '../../common/find-movie-by-id';
+import PageNotFound from '../page-not-found/page-not-found';
 
 type Props = {
   movieId: string;
@@ -17,16 +18,18 @@ type Props = {
 }
 
 const MainPage: FC<Props> = (props) => {
-  const [activeMovie, setActiveMovie] = useState('');
+  const [, setActiveMovie] = useState(''); //activeMovie is here
   const { movieId, allMovies, filmCount, isInList } = props;
-  const movie = FindMovieById(movieId);
+  const movie = findMovieById(movieId);
+  if (!movie) {
+    return (<PageNotFound></PageNotFound>);
+  }
   const { name, backgroundPath, posterPath, genre, year } = movie;
-
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={backgroundPath} alt={name} className={activeMovie}/>
+          <img src={backgroundPath} alt={name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -57,7 +60,9 @@ const MainPage: FC<Props> = (props) => {
           </ul>
           <div className="catalog__films-list">
             {allMovies.map((currentMovie) =>
-              (<Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>))}
+              (
+                <Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>
+              ))}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PlayButton from '../../components/play-button/play-button';
-import { FindMovieById } from '../../common/find-movie-by-id';
+import { findMovieById } from '../../common/find-movie-by-id';
+import PageNotFound from '../page-not-found/page-not-found';
 
 type Props = {
   playerName: string;
@@ -11,7 +12,10 @@ type Props = {
 const PlayerPage: FC<Props> = (props) => {
   const { playerName, isPause } = props;
   const { id } = useParams();
-  const movie = FindMovieById(id);
+  const movie = findMovieById(id);
+  if (!movie) {
+    return (<PageNotFound></PageNotFound>);
+  }
   const { duration } = movie;
 
   return (

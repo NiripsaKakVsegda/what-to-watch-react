@@ -57,10 +57,7 @@ const MainPage: FC<Props> = (props) => {
           </ul>
           <div className="catalog__films-list">
             {allMovies.map((currentMovie) =>
-              (
-                <div key={currentMovie.id} onMouseOver={() => setActiveMovie(currentMovie.id)} onMouseOut={() => setActiveMovie('')}>
-                  <Movie movie={currentMovie}/>
-                </div>))}
+              (<Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>))}
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

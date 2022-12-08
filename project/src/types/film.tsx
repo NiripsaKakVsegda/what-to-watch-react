@@ -1,7 +1,8 @@
 import { Duration } from './duration';
-import { Comment } from './comment';
+import { UserReview } from './user-review';
 
 export type Film = {
+  id: string;
   name: string;
   genre: string;
   year: number;
@@ -9,9 +10,10 @@ export type Film = {
   actors: string[];
   duration: Duration;
   description: string;
+  videoPath: string;
   path: string;
   posterPath: string;
   backgroundPath: string;
-  reviews: Comment[];
+  reviews: UserReview[];
   similarMovies: Film[];
 }

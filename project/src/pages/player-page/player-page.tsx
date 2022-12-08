@@ -1,22 +1,29 @@
 import { FC } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import PlayButton from '../../components/play-button/play-button';
-import { Film } from '../../types/film';
+import { findMovieById } from '../../common/find-movie-by-id';
+import PageNotFound from '../page-not-found/page-not-found';
 
 type Props = {
-  movie: Film;
   playerName: string;
   isPause?: boolean;
 }
 
 const PlayerPage: FC<Props> = (props) => {
-  const {movie, playerName, isPause} = props;
-  const {posterPath, duration} = movie;
+  const { playerName, isPause } = props;
+  const { id } = useParams();
+  const movie = findMovieById(id);
+  if (!movie) {
+    return (<PageNotFound></PageNotFound>);
+  }
+  const { duration } = movie;
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster={posterPath}></video>
-
-      <button type="button" className="player__exit">Exit</button>
-
+      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <Link to={`/films/${movie.id}`}>
+        <button type="button" className="player__exit">Exit</button>
+      </Link>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
@@ -25,11 +32,9 @@ const PlayerPage: FC<Props> = (props) => {
           </div>
           <div className="player__time-value">{`${duration.hours}:${duration.minutes}:${duration.seconds}`}</div>
         </div>
-
         <div className="player__controls-row">
           <PlayButton isPause={isPause}/>
           <div className="player__name">{playerName}</div>
-
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>

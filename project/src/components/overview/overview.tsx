@@ -7,14 +7,16 @@ type Props = {
 }
 
 const Overview: FC<Props> = (props) => {
-  const {description, director, actors, reviews} = props.movie;
+  const { movie } = props;
+  const { description, director, actors, reviews } = movie;
   const rating = getRating(reviews);
   const ratingLevel = getRatingString(rating);
   const ratingCount = reviews.length;
+
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{rating}</div>
+        <div className="film-rating__score">{rating.toFixed(1)}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{ratingLevel}</span>
           <span className="film-rating__count">{`${ratingCount} ratings`}</span>
@@ -22,9 +24,7 @@ const Overview: FC<Props> = (props) => {
       </div>
       <div className="film-card__text">
         {<p>{description}</p>}
-
         <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
-
         <p className="film-card__starring"><strong>{`Starring: ${actors.join(', ')}`}</strong></p>
       </div>
     </>

@@ -5,12 +5,13 @@ import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
 import Movie from '../../components/movie/movie';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
-import Overview from '../../components/overview/overview';
-import Details from '../../components/details/details';
-import Reviews from '../../components/reviews/reviews';
+import Overview from '../../components/tabs/overview/overview';
+import Details from '../../components/tabs/details/details';
+import Reviews from '../../components/tabs/reviews/reviews';
 import { MoviePageType } from '../../types/movie-page.enum';
 import { findMovieById } from '../../common/find-movie-by-id';
 import PageNotFound from '../page-not-found/page-not-found';
+import { FILMS } from '../../mocks/films';
 
 export type Props = {
   filmCount: number;
@@ -26,7 +27,7 @@ const MoviePage: FC<Props> = (props) => {
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
   }
-  const { name, year, backgroundPath, posterPath, reviews, similarMovies, genre } = movie;
+  const { name, year, backgroundPath, posterPath, reviews, genre } = movie;
 
   return (
     <>
@@ -61,20 +62,20 @@ const MoviePage: FC<Props> = (props) => {
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className={`film-nav__item${pageType === MoviePageType.OverviewPage ? ' film-nav__item--active' : ''}`}>
-                    <div style={{cursor: 'pointer'}} onClick={() => setPageType(MoviePageType.OverviewPage)} className="film-nav__link">Overview</div>
-                  </li>
-                  <li className={`film-nav__item${pageType === MoviePageType.DetailsPage ? ' film-nav__item--active' : ''}`}>
-                    <div style={{cursor: 'pointer'}} onClick={() => setPageType(MoviePageType.DetailsPage)} className="film-nav__link">Details</div>
-                  </li>
-                  <li className={`film-nav__item${pageType === MoviePageType.ReviewsPage ? ' film-nav__item--active' : ''}`}>
-                    <div style={{cursor: 'pointer'}} onClick={() => setPageType(MoviePageType.ReviewsPage)} className="film-nav__link">Reviews</div>
-                  </li>
+                  {
+                    Object.values(MoviePageType).map((currentPageType) =>
+                      (
+                        <li key={currentPageType} className={`film-nav__item${pageType === currentPageType ? ' film-nav__item--active' : ''}`}>
+                          <div style={{cursor: 'pointer'}} onClick={() => setPageType(currentPageType)} className="film-nav__link">{currentPageType}</div>
+                        </li>
+                      )
+                    )
+                  }
                 </ul>
               </nav>
-              {pageType === MoviePageType.OverviewPage ? <Overview movie={movie} /> : null}
-              {pageType === MoviePageType.DetailsPage ? <Details movie={movie}/> : null}
-              {pageType === MoviePageType.ReviewsPage ? <Reviews reviews={reviews}/> : null}
+              {pageType === MoviePageType.OverviewPage && <Overview movie={movie} />}
+              {pageType === MoviePageType.DetailsPage && <Details movie={movie}/>}
+              {pageType === MoviePageType.ReviewsPage && <Reviews reviews={reviews}/>}
             </div>
           </div>
         </div>
@@ -83,7 +84,12 @@ const MoviePage: FC<Props> = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
-            {similarMovies.slice(3).map((currentMovie) => <Movie movie={currentMovie} key={currentMovie.id}/>)}
+            {
+              FILMS
+                .filter((film) => film.genre === genre && film.id !== id)
+                .slice(0, 4)
+                .map((currentMovie) => <Movie movie={currentMovie} key={currentMovie.id}/>)
+            }
           </div>
         </section>
         <Footer/>

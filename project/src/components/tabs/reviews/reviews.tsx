@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Review from '../review/review';
-import { UserReview } from '../../types/user-review';
+import Review from '../../review/review';
+import { UserReview } from '../../../types/user-review';
 
 type Props = {
   reviews: UserReview[];

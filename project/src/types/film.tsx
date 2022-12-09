@@ -1,10 +1,11 @@
 import { Duration } from './duration';
 import { UserReview } from './user-review';
+import {Genre} from "./genre.enum";
 
 export type Film = {
   id: string;
   name: string;
-  genre: string;
+  genre: Genre;
   year: number;
   director: string;
   actors: string[];

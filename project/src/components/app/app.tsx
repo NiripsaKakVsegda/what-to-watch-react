@@ -11,17 +11,14 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import { AuthStatus } from '../../types/auth-status.enum';
 import { MoviePageType } from '../../types/movie-page.enum';
 import { Film } from '../../types/film';
-import { findMovieById } from '../../common/find-movie-by-id';
 
 type Props = {
   movieId: string;
-  allMovies: Film[];
   myMovies: Film[];
 }
 
 const App: FC<Props> = (props) => {
-  const { movieId, allMovies, myMovies } = props;
-  const movie = findMovieById(movieId)!;
+  const { movieId, myMovies } = props;
   const isInList = false;
   const moviePageType = MoviePageType.OverviewPage;
   const playerName = 'Transpotting';
@@ -30,7 +27,7 @@ const App: FC<Props> = (props) => {
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={
-          <MainPage isInList={isInList} filmCount={myMovies.length} allMovies={allMovies} movieId={movie.id}/>
+          <MainPage isInList={isInList} filmCount={myMovies.length} movieId={movieId}/>
         }
         />
         <Route path={'/login'} element={

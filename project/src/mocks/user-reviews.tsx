@@ -4,19 +4,19 @@ export const REVIEWS: UserReview[] = [
   {
     text: 'Awesome film!',
     author: 'niripsa',
-    date: new Date(2020, 10, 10),
+    date: '2022-01-01',
     rating: 9,
   },
   {
     text: 'Awful film!',
     author: 'gongon',
-    date: new Date(2021, 10, 11),
+    date: '2022-01-02',
     rating: 2,
   },
   {
     text: 'Bruh...',
     author: 'notahuman',
-    date: new Date(2022, 10, 12),
+    date: '2022-01-03',
     rating: 4,
   }
 ];

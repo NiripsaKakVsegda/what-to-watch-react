@@ -14,7 +14,6 @@ const VideoPlayer: FC<Props> = (props) => {
   const { videoPath, cardPath } = movie;
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
   useEffect(() => {
     if (videoRef.current === null) {
       return;

@@ -6,20 +6,21 @@ import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 import { Genre } from '../../types/genre.enum';
-import { Film } from '../../types/film';
 import { findMovieById } from '../../common/find-movie-by-id';
 import PageNotFound from '../page-not-found/page-not-found';
+import {useAppSelector} from '../../hooks';
 
 type Props = {
   movieId: string;
-  allMovies: Film[];
   filmCount: number;
   isInList?: boolean;
 }
 
 const MainPage: FC<Props> = (props) => {
   const [, setActiveMovie] = useState(''); //activeMovie is here
-  const { movieId, allMovies, filmCount, isInList } = props;
+  const { movieId, filmCount, isInList } = props;
+  const { movies } = useAppSelector((state) => state);
+
   const movie = findMovieById(movieId);
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
@@ -56,10 +57,10 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            {Object.keys(Genre).map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
+            {Object.values(Genre).map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
           </ul>
           <div className="catalog__films-list">
-            {allMovies.map((currentMovie) =>
+            {movies.map((currentMovie) =>
               (
                 <Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>
               ))}

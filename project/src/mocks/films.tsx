@@ -1,6 +1,7 @@
 import { Duration } from '../types/duration';
 import { Film } from '../types/film';
 import { REVIEWS } from './user-reviews';
+import { Genre } from '../types/genre.enum';
 
 const actors = [
   'Jhun Li',
@@ -17,20 +18,21 @@ const duration: Duration = {
 const description = 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum';
 const posterPath = 'img/the-grand-budapest-hotel-poster.jpg';
 const backgroundPath = 'img/bg-the-grand-budapest-hotel.jpg';
-const videoPath = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
+//const videoPath = 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4';
+const videoPath = 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm';
 
 export const FILMS: Film[] = [
   {
     id: 'the-grand-budapest-hotel',
     name: 'The Grand Budapest Hotel',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
     duration: duration,
     description: description,
     videoPath: videoPath,
-    cardPath: 'img/bg-the-grand-budapest-hotel.jpg',
+    cardPath: 'img/the-grand-budapest-hotel.jpg',
     posterPath: posterPath,
     backgroundPath: backgroundPath,
     reviews: REVIEWS,
@@ -38,7 +40,7 @@ export const FILMS: Film[] = [
   {
     id: 'bohemian-rhapsody',
     name: 'Bohemian Rhapsody',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -52,8 +54,8 @@ export const FILMS: Film[] = [
   },
   {
     id: 'fantastic-beasts-the-crimes-of-grindelwald',
-    name: 'Fantastic Beasts: The Crimes of Grindelwald',
-    genre: 'Crime',
+    name: 'Fantastic Beasts: The crimes of Grindelwald',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -68,7 +70,7 @@ export const FILMS: Film[] = [
   {
     id: 'macbeth',
     name: 'Macbeth',
-    genre: 'Crime',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -83,7 +85,7 @@ export const FILMS: Film[] = [
   {
     id: 'aviator',
     name: 'Aviator',
-    genre: 'Crime',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -98,7 +100,7 @@ export const FILMS: Film[] = [
   {
     id: 'we-need-to-talk-about-kevin',
     name: 'We need to talk about Kevin',
-    genre: 'Crime',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -113,7 +115,7 @@ export const FILMS: Film[] = [
   {
     id: 'what-we-do-in-the-shadows',
     name: 'What We Do in the Shadows',
-    genre: 'Crime',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -128,7 +130,7 @@ export const FILMS: Film[] = [
   {
     id: 'revenant',
     name: 'Revenant',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -143,7 +145,7 @@ export const FILMS: Film[] = [
   {
     id: 'johnny-english',
     name:'Johnny English',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -158,7 +160,7 @@ export const FILMS: Film[] = [
   {
     id: 'shutter-island',
     name: 'Shutter Island',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -173,7 +175,7 @@ export const FILMS: Film[] = [
   {
     id: 'pulp-fiction',
     name: 'Pulp Fiction',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -188,7 +190,7 @@ export const FILMS: Film[] = [
   {
     id: 'no-country-for-old-men',
     name: 'No Country for Old Men',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -203,7 +205,7 @@ export const FILMS: Film[] = [
   {
     id: 'snatch',
     name: 'Snatch',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -218,7 +220,7 @@ export const FILMS: Film[] = [
   {
     id: 'moonrise-kingdom',
     name: 'Moonrise Kingdom',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -233,7 +235,7 @@ export const FILMS: Film[] = [
   {
     id: 'seven-years-in-tibet',
     name: 'Seven Years in Tibet',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -248,7 +250,7 @@ export const FILMS: Film[] = [
   {
     id: 'midnight-special',
     name: 'Midnight Special',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -263,7 +265,7 @@ export const FILMS: Film[] = [
   {
     id: 'war-of-the-worlds',
     name: 'War of the Worlds',
-    genre: 'Comedy',
+    genre: Genre.COMEDY,
     year: year,
     director: director,
     actors: actors,
@@ -278,7 +280,7 @@ export const FILMS: Film[] = [
   {
     id: 'dardjeeling-limited',
     name: 'Dardjeeling Limited',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -293,7 +295,7 @@ export const FILMS: Film[] = [
   {
     id: 'orlando',
     name: 'Orlando',
-    genre: 'Thriller',
+    genre: Genre.THRILLER,
     year: year,
     director: director,
     actors: actors,
@@ -308,7 +310,7 @@ export const FILMS: Film[] = [
   {
     id: 'mindhunter',
     name: 'Mindhunter',
-    genre: 'Drama',
+    genre: Genre.CRIME,
     year: year,
     director: director,
     actors: actors,
@@ -321,4 +323,3 @@ export const FILMS: Film[] = [
     reviews: REVIEWS,
   }
 ];
-

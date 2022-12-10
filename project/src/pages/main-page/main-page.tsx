@@ -8,7 +8,8 @@ import FilmCardButtons from '../../components/film-card-buttons/film-card-button
 import { Genre } from '../../types/genre.enum';
 import { findMovieById } from '../../common/find-movie-by-id';
 import PageNotFound from '../page-not-found/page-not-found';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
+import ShowMore from '../../components/show-more/show-more';
 
 type Props = {
   movieId: string;
@@ -19,12 +20,14 @@ type Props = {
 const MainPage: FC<Props> = (props) => {
   const [, setActiveMovie] = useState(''); //activeMovie is here
   const { movieId, filmCount, isInList } = props;
-  const { movies } = useAppSelector((state) => state);
+
+  const { movies, moviesCount } = useAppSelector((state) => state);
 
   const movie = findMovieById(movieId);
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
   }
+
   const { name, backgroundPath, posterPath, genre, year } = movie;
   return (
     <>
@@ -60,14 +63,12 @@ const MainPage: FC<Props> = (props) => {
             {Object.values(Genre).map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
           </ul>
           <div className="catalog__films-list">
-            {movies.map((currentMovie) =>
+            {movies.slice(0, moviesCount).map((currentMovie) =>
               (
                 <Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>
               ))}
           </div>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {movies.length > moviesCount && <ShowMore/>}
         </section>
         <Footer/>
       </div>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PlayButton from '../../components/play-button/play-button';
-import { findMovieById } from '../../common/find-movie-by-id';
+import {FindMovieById, getDuration} from '../../common/common-functions';
 import PageNotFound from '../page-not-found/page-not-found';
 
 type Props = {
@@ -12,11 +12,12 @@ type Props = {
 const PlayerPage: FC<Props> = (props) => {
   const { playerName, isPause } = props;
   const { id } = useParams();
-  const movie = findMovieById(id);
+  const movie = FindMovieById(id);
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
   }
-  const { duration } = movie;
+  const { runTime } = movie;
+  const duration = getDuration(runTime);
 
   return (
     <div className="player">
@@ -30,7 +31,7 @@ const PlayerPage: FC<Props> = (props) => {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">{`${duration.hours}:${duration.minutes}:${duration.seconds}`}</div>
+          <div className="player__time-value">{`${duration.hours}:${duration.minutes}`}</div>
         </div>
         <div className="player__controls-row">
           <PlayButton isPause={isPause}/>

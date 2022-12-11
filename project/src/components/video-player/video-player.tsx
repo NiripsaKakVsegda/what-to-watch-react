@@ -11,7 +11,7 @@ type Props = {
 
 const VideoPlayer: FC<Props> = (props) => {
   const { muted, movie, width, height, isPlaying } = props;
-  const { videoPath, cardPath } = movie;
+  const { previewVideoLink, previewImage } = movie;
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   useEffect(() => {
@@ -28,7 +28,7 @@ const VideoPlayer: FC<Props> = (props) => {
   }, [isPlaying]);
 
   return (
-    <video ref={videoRef} width={width} height={height} src={videoPath} poster={cardPath} muted={muted} ></video>
+    <video ref={videoRef} width={width} height={height} src={previewVideoLink} poster={previewImage} muted={muted} ></video>
   );
 };
 

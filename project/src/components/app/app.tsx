@@ -8,26 +8,33 @@ import MyListPage from '../../pages/my-list-page/my-list-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
-import { AuthStatus } from '../../types/auth-status.enum';
 import { MoviePageType } from '../../types/movie-page.enum';
 import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import { isCheckedAuth } from '../../common/common-functions';
 
 type Props = {
-  movieId: string;
   myMovies: Film[];
 }
 
 const App: FC<Props> = (props) => {
-  const { movieId, myMovies } = props;
+  const { myMovies } = props;
   const isInList = false;
-  const moviePageType = MoviePageType.OverviewPage;
-  const playerName = 'Transpotting';
+
+  const { authStatus, isDataLoaded, movies } = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authStatus) || isDataLoaded || movies.length === 0) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={
-          <MainPage isInList={isInList} filmCount={myMovies.length} movieId={movieId}/>
+          <MainPage isInList={isInList} filmCount={myMovies.length}/>
         }
         />
         <Route path={'/login'} element={
@@ -35,13 +42,13 @@ const App: FC<Props> = (props) => {
         }
         />
         <Route path={'/mylist'} element={
-          <PrivateRoute authStatus={AuthStatus.NoAuth}>
+          <PrivateRoute authStatus={authStatus}>
             <MyListPage myMovies={myMovies}/>
           </PrivateRoute>
         }
         />
         <Route path={'/films/:id'} element={
-          <MoviePage filmCount={myMovies.length} moviePageType={moviePageType}/>
+          <MoviePage filmCount={myMovies.length} moviePageType={MoviePageType.OverviewPage}/>
         }
         />
         <Route path={'/films/:id/review'} element={
@@ -49,7 +56,7 @@ const App: FC<Props> = (props) => {
         }
         />
         <Route path={'/player/:id'} element={
-          <PlayerPage playerName={playerName}/>
+          <PlayerPage playerName={'Transpotting'}/>
         }
         />
         <Route path="/404" element={

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import MoviePage from '../../pages/movie-page/movie-page';
@@ -13,6 +13,8 @@ import { Film } from '../../types/film';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { isCheckedAuth } from '../../common/common-functions';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type Props = {
   myMovies: Film[];
@@ -31,7 +33,7 @@ const App: FC<Props> = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={'/'} element={
           <MainPage isInList={isInList} filmCount={myMovies.length}/>
@@ -64,7 +66,7 @@ const App: FC<Props> = (props) => {
         }
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 };
 

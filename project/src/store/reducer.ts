@@ -4,7 +4,7 @@ import {
   loadMovies, requireAuthorization,
   resetMoviePage,
   resetShowMore,
-  setDataLoadedStatus, setError,
+  setDataLoadedStatus,
   showMore,
   updateMoviesByGenre
 } from './action';
@@ -22,7 +22,6 @@ type InitialState = {
   moviesCount: number;
   isDataLoaded: boolean;
   authStatus: AuthStatus;
-  error: string | null;
   mainMovieId: number;
 }
 
@@ -33,7 +32,6 @@ const initialState: InitialState = {
   moviesCount: MOVIE_COUNT_STEP,
   isDataLoaded: false,
   authStatus: AuthStatus.UNKNOWN,
-  error: null,
   mainMovieId: Math.floor(Math.random() * MOVIES_COUNT) + 1
 };
 
@@ -69,9 +67,6 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadMovies, (state, action) => {
       state.movies = action.payload;
       state.currentMovies = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 

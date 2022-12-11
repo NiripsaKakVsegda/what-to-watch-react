@@ -2,7 +2,7 @@ import { AuthStatus } from '../types/auth-status.enum';
 import { Film } from '../types/film';
 import { useAppSelector } from '../hooks';
 import { UserReview } from '../types/user-review';
-import {Duration} from "../types/duration";
+import {Duration} from '../types/duration';
 
 export const isCheckedAuth = (authStatus: AuthStatus): boolean =>
   authStatus === AuthStatus.UNKNOWN;

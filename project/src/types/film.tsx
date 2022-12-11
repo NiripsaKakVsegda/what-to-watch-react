@@ -1,19 +1,21 @@
-import { Duration } from './duration';
-import { UserReview } from './user-review';
-import {Genre} from "./genre.enum";
+import { Genre } from "./genre.enum";
 
 export type Film = {
-  id: string;
-  name: string;
-  genre: Genre;
-  year: number;
-  director: string;
-  actors: string[];
-  duration: Duration;
-  description: string;
-  videoPath: string;
-  cardPath: string;
-  posterPath: string;
-  backgroundPath: string;
-  reviews: UserReview[];
-}
+  id: number; //
+  name: string; //
+  genre: Genre; // string
+  released: number; //
+  director: string; //
+  starring: [string]; // [string]
+  runTime: number; //
+  description: string; //
+  videoLink: string; //
+  previewVideoLink: string; //
+  previewImage: string; //
+  posterImage: string; //
+  backgroundImage: string; //
+  backgroundColor: string; //
+  isFavorite: boolean; //
+  rating: number;
+  scoresCount: number;
+};

@@ -2,23 +2,24 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { findMovieById } from '../../common/find-movie-by-id';
 import Form from '../../components/form/form';
 import PageNotFound from '../page-not-found/page-not-found';
+import { FindMovieById } from '../../common/common-functions';
 
 const AddReviewPage: FC = () => {
   const { id } = useParams();
-  const movie = findMovieById(id);
+  const movie = FindMovieById(id);
+
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
   }
-  const { backgroundPath, name, posterPath } = movie;
+  const { backgroundImage, name, posterImage } = movie;
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={backgroundPath} alt={name}/>
+          <img src={backgroundImage} alt={name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -36,7 +37,7 @@ const AddReviewPage: FC = () => {
           <UserBlock/>
         </header>
         <div className="film-card__poster film-card__poster--small">
-          <img src={posterPath} alt={`${name} poster`} width="218" height="327"/>
+          <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
         </div>
       </div>
       <div className="add-review">

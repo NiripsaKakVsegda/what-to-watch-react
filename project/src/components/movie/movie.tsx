@@ -5,7 +5,7 @@ import VideoPlayer from '../video-player/video-player';
 
 type Props = {
   movie: Film;
-  setActiveMovie?: Dispatch<SetStateAction<string>>;
+  setActiveMovie?: Dispatch<SetStateAction<number | null>>;
 }
 
 const Movie: FC<Props> = (props) => {
@@ -32,7 +32,7 @@ const Movie: FC<Props> = (props) => {
   };
 
   const handleMouseOut = () => {
-    setActiveMovie?.((_) => '');
+    setActiveMovie?.((_) => null);
     setIsReadyToPlay(false);
     setIsPlaying(false);
   };

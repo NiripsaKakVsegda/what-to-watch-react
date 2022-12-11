@@ -9,9 +9,9 @@ import Overview from '../../components/tabs/overview/overview';
 import Details from '../../components/tabs/details/details';
 import Reviews from '../../components/tabs/reviews/reviews';
 import { MoviePageType } from '../../types/movie-page.enum';
-import { findMovieById } from '../../common/find-movie-by-id';
+import { FindMovieById } from '../../common/common-functions';
 import PageNotFound from '../page-not-found/page-not-found';
-import { FILMS } from '../../mocks/films';
+import {useAppSelector} from "../../hooks";
 
 export type Props = {
   filmCount: number;
@@ -23,18 +23,21 @@ const MoviePage: FC<Props> = (props) => {
   const { filmCount, moviePageType, isInList } = props;
   const { id } = useParams();
   const [pageType, setPageType] = useState(moviePageType);
-  const movie = findMovieById(id);
+  const movie = FindMovieById(id);
   if (!movie) {
     return (<PageNotFound></PageNotFound>);
   }
-  const { name, year, backgroundPath, posterPath, reviews, genre } = movie;
+  const { name, released, backgroundImage, posterImage, genre } = movie;
+  const movieId = movie.id;
+
+  const { movies } = useAppSelector((state) => state);
 
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={backgroundPath} alt={name}/>
+            <img src={backgroundImage} alt={name}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
@@ -46,7 +49,7 @@ const MoviePage: FC<Props> = (props) => {
               <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__year">{released}</span>
               </p>
               <FilmCardButtons filmCardCount={filmCount} isInList={isInList} addReview/>
             </div>
@@ -55,7 +58,7 @@ const MoviePage: FC<Props> = (props) => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={posterPath} alt={`${name} poster`} width="218"
+              <img src={posterImage} alt={`${name} poster`} width="218"
                 height="327"
               />
             </div>
@@ -75,7 +78,7 @@ const MoviePage: FC<Props> = (props) => {
               </nav>
               {pageType === MoviePageType.OverviewPage && <Overview movie={movie} />}
               {pageType === MoviePageType.DetailsPage && <Details movie={movie}/>}
-              {pageType === MoviePageType.ReviewsPage && <Reviews reviews={reviews}/>}
+              {pageType === MoviePageType.ReviewsPage && <Reviews movieId={movie.id}/>}
             </div>
           </div>
         </div>
@@ -85,8 +88,8 @@ const MoviePage: FC<Props> = (props) => {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              FILMS
-                .filter((film) => film.genre === genre && film.id !== id)
+              movies
+                .filter((film) => film.genre === genre && film.id !== movieId)
                 .slice(0, 4)
                 .map((currentMovie) => <Movie movie={currentMovie} key={currentMovie.id}/>)
             }

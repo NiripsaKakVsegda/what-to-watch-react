@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { Film } from '../../../types/film';
+import {getDuration} from "../../../common/common-functions";
 
 type Props = {
   movie: Film;
 }
 
 const Details: FC<Props> = (props) => {
-  const { director, actors, duration, genre, year } = props.movie;
+  const { director, starring, runTime, genre, released } = props.movie;
+  const duration = getDuration(runTime);
 
   return (
     <div className="film-card__text film-card__row">
@@ -18,7 +20,7 @@ const Details: FC<Props> = (props) => {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {actors.map((actor) => <div key={actor.split(' ').join('-')}>{actor}</div>)}
+            {starring.map((actor) => <div key={actor.split(' ').join('-')}>{actor}</div>)}
           </span>
         </p>
       </div>
@@ -33,7 +35,7 @@ const Details: FC<Props> = (props) => {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{year}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>

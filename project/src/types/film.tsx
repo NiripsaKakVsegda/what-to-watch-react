@@ -1,9 +1,7 @@
-import { Genre } from "./genre.enum";
-
 export type Film = {
   id: number; //
   name: string; //
-  genre: Genre; // string
+  genre: string; // string
   released: number; //
   director: string; //
   starring: [string]; // [string]

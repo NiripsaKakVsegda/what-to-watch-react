@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Movie from '../../components/movie/movie';
 import GenreLink from '../../components/genre-link/genre-link';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
-import { Genre } from '../../types/genre.enum';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMore from '../../components/show-more/show-more';
+import {resetMoviePage} from '../../store/action';
 
 type Props = {
   filmCount: number;
@@ -18,8 +18,14 @@ const MainPage: FC<Props> = (props) => {
   const [, setActiveMovie] = useState<number | null>(null);
   const { filmCount, isInList } = props;
 
-  const { currentMovies, moviesCount, movies, mainMovieId } = useAppSelector((state) => state);
+  const { currentMovies, moviesCount, movies, mainMovieId, allGenres } = useAppSelector((state) => state);
   const movie = movies[mainMovieId - 1];
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetMoviePage());
+  }, [dispatch]);
 
   const { name, backgroundImage, posterImage, genre, released } = movie;
   return (
@@ -53,7 +59,7 @@ const MainPage: FC<Props> = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
-            {Object.values(Genre).map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
+            {allGenres.map((g) => <GenreLink genre={g} key={`genre-${g.replace(/\s/g, '')}`}/>)}
           </ul>
           <div className="catalog__films-list">
             {currentMovies.slice(0, moviesCount).map((currentMovie) =>

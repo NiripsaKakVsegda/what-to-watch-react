@@ -1,18 +1,14 @@
 import { FC } from 'react';
 import Review from '../../review/review';
-import { UserReview } from '../../../types/user-review';
+import { useAppSelector } from '../../../hooks';
 
-type Props = {
-  movieId: number;
-}
-
-const Reviews: FC<Props> = (props) => {
-  const { movieId } = props;
+const Reviews: FC = () => {
+  const { comments } = useAppSelector((state) => state);
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {/*{reviews.map((review) => <Review review={review} key={`review-${review.author}-${review.rating}`}/>)}*/}
+        {comments.map((comment) => <Review review={comment} key={`review-${comment.user.name}-${comment.rating}`}/>)}
       </div>
     </div>
   );

@@ -1,6 +1,11 @@
 export type UserReview = {
-  text: string;
-  author: string;
+  id: number;
+  comment: string;
   date: string;
   rating: number;
+  user: {
+    id: number;
+    name: string;
+  };
 }
+

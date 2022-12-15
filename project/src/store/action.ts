@@ -1,9 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Genre } from '../types/genre.enum';
 import { Film } from '../types/film';
 import { AuthStatus } from '../types/auth-status.enum';
+import { UserReview } from '../types/user-review';
+import {DataLoadType} from '../types/data-load';
 
-export const changeGenre = createAction<Genre>('movies/changeGenre');
+export const changeGenre = createAction<string>('movies/changeGenre');
 
 export const updateMoviesByGenre = createAction('movies/updateMovies');
 
@@ -14,8 +15,10 @@ export const resetShowMore = createAction('movies/resetShowMore');
 export const resetMoviePage = createAction('movies/resetPage');
 
 export const loadMovies = createAction<Film[]>('data/loadMovies');
-
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
+export const loadMovie = createAction<Film>('data/loadMovie');
+export const loadSimilarMovies = createAction<Film[]>('data/loadSimilarMovies');
+export const loadComments = createAction<UserReview[]>('data/loadComments');
+export const setDataLoadedStatus = createAction<DataLoadType>('data/setDataLoadedStatus');
 
 export const requireAuthorization = createAction<AuthStatus>('user/requireAuthorization');
 

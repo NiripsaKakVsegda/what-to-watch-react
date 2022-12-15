@@ -1,5 +1,4 @@
-import { FC, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import Footer from '../../components/footer/footer';
@@ -9,9 +8,12 @@ import Overview from '../../components/tabs/overview/overview';
 import Details from '../../components/tabs/details/details';
 import Reviews from '../../components/tabs/reviews/reviews';
 import { MoviePageType } from '../../types/movie-page.enum';
-import { FindMovieById } from '../../common/common-functions';
 import PageNotFound from '../page-not-found/page-not-found';
-import {useAppSelector} from "../../hooks";
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { useParams } from 'react-router-dom';
+import { fetchMovieAction, fetchMovieCommentsAction, fetchSimilarMoviesAction } from '../../store/api-actions';
+import { redirectToRoute } from '../../store/action';
 
 export type Props = {
   filmCount: number;
@@ -21,16 +23,32 @@ export type Props = {
 
 const MoviePage: FC<Props> = (props) => {
   const { filmCount, moviePageType, isInList } = props;
-  const { id } = useParams();
   const [pageType, setPageType] = useState(moviePageType);
-  const movie = FindMovieById(id);
-  if (!movie) {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  if (!id || !parseInt(id, 10)) {
+    dispatch(redirectToRoute('/error404'));
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    const movieId = parseInt(id!, 10);
+    dispatch(fetchMovieAction({movieId: movieId}));
+    dispatch(fetchMovieCommentsAction({movieId: movieId}));
+    dispatch(fetchSimilarMoviesAction({movieId: movieId}));
+  }, [id, dispatch]);
+
+  const { currentMovie, similarMovies, isMovieLoading, isCommentsLoading, isSimilarMoviesLoading } = useAppSelector((state) => state);
+
+  if (isMovieLoading || isCommentsLoading || isSimilarMoviesLoading) {
+    return <LoadingScreen/>;
+  }
+
+  if (!currentMovie) {
+    console.log('not found');
     return (<PageNotFound></PageNotFound>);
   }
-  const { name, released, backgroundImage, posterImage, genre } = movie;
-  const movieId = movie.id;
-
-  const { movies } = useAppSelector((state) => state);
+  const { name, released, backgroundImage, posterImage, genre } = currentMovie;
 
   return (
     <>
@@ -76,9 +94,9 @@ const MoviePage: FC<Props> = (props) => {
                   }
                 </ul>
               </nav>
-              {pageType === MoviePageType.OverviewPage && <Overview movie={movie} />}
-              {pageType === MoviePageType.DetailsPage && <Details movie={movie}/>}
-              {pageType === MoviePageType.ReviewsPage && <Reviews movieId={movie.id}/>}
+              {pageType === MoviePageType.OverviewPage && <Overview movie={currentMovie} />}
+              {pageType === MoviePageType.DetailsPage && <Details movie={currentMovie}/>}
+              {pageType === MoviePageType.ReviewsPage && <Reviews/>}
             </div>
           </div>
         </div>
@@ -88,10 +106,9 @@ const MoviePage: FC<Props> = (props) => {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              movies
-                .filter((film) => film.genre === genre && film.id !== movieId)
+              similarMovies
                 .slice(0, 4)
-                .map((currentMovie) => <Movie movie={currentMovie} key={currentMovie.id}/>)
+                .map((m) => <Movie movie={m} key={m.id}/>)
             }
           </div>
         </section>

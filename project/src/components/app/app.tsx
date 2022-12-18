@@ -24,9 +24,9 @@ const App: FC<Props> = (props) => {
   const { myMovies } = props;
   const isInList = false;
 
-  const { authStatus, isDataLoaded, movies } = useAppSelector((state) => state);
+  const { authStatus, isMoviesLoading, movies } = useAppSelector((state) => state);
 
-  if (isCheckedAuth(authStatus) || isDataLoaded || movies.length === 0) {
+  if (isCheckedAuth(authStatus) || isMoviesLoading || !movies.length) {
     return (
       <LoadingScreen />
     );
@@ -61,7 +61,11 @@ const App: FC<Props> = (props) => {
           <PlayerPage playerName={'Transpotting'}/>
         }
         />
-        <Route path="/404" element={
+        <Route path={'/error404'} element={
+          <PageNotFound/>
+        }
+        />
+        <Route path="/*" element={
           <PageNotFound/>
         }
         />

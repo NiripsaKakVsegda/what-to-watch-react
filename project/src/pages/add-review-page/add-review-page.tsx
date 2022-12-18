@@ -10,7 +10,7 @@ const AddReviewPage: FC = () => {
   const { id } = useParams();
   const movie = FindMovieById(id);
 
-  if (!movie) {
+  if (!movie || !id) {
     return (<PageNotFound></PageNotFound>);
   }
   const { backgroundImage, name, posterImage } = movie;
@@ -41,7 +41,7 @@ const AddReviewPage: FC = () => {
         </div>
       </div>
       <div className="add-review">
-        <Form/>
+        <Form movieId={id}/>
       </div>
     </section>
   );

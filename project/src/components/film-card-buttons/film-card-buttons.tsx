@@ -11,7 +11,7 @@ type Props = {
 
 const FilmCardButtons: FC<Props> = (props) => {
   const { filmCardCount, addReview, isInList } = props;
-  const { mainMovieId } = useAppSelector((state) => state);
+  const { mainMovieId, authStatus } = useAppSelector((state) => state);
   const { id } = useParams();
   const movieId = id ?? mainMovieId;
 
@@ -30,7 +30,7 @@ const FilmCardButtons: FC<Props> = (props) => {
         <span>My list</span>
         <span className="film-card__count">{filmCardCount}</span>
       </button>
-      {addReview ? <Link to={`/films/${movieId}/review`} className="btn film-card__button">Add review</Link> : null}
+      {addReview && authStatus === 'auth' && <Link to={`/films/${movieId}/review`} className="btn film-card__button">Add review</Link>}
     </div>
   );
 };

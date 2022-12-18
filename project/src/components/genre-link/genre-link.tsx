@@ -2,10 +2,9 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { changeGenre, resetShowMore, updateMoviesByGenre } from '../../store/action';
-import { Genre } from '../../types/genre.enum';
 
 type Props = {
-  genre: Genre;
+  genre: string;
 }
 
 const GenreLink: FC<Props> = (props) => {

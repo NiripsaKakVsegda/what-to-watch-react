@@ -45,7 +45,6 @@ const MoviePage: FC<Props> = (props) => {
   }
 
   if (!currentMovie) {
-    console.log('not found');
     return (<PageNotFound></PageNotFound>);
   }
   const { name, released, backgroundImage, posterImage, genre } = currentMovie;

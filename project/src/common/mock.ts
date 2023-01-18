@@ -1,4 +1,4 @@
-import {Film} from "../types/film";
+import { Film } from '../types/film';
 
 export const MockFilm: Film = {
   id: 5,
@@ -18,4 +18,4 @@ export const MockFilm: Film = {
   isFavorite: false,
   rating: 10,
   scoresCount: 1
-}
+};

@@ -4,6 +4,7 @@ import { addCommentAction, fetchMovieCommentsAction } from '../../store/api-acti
 import { redirectToRoute } from '../../store/action';
 import Stars from './stars';
 import ReviewTextarea from './review-textarea';
+import { APIRoute } from '../../types/api-route.enum';
 
 type Props = {
   movieId: string;
@@ -31,7 +32,7 @@ const ReviewForm: FC<Props> = (props) => {
     if (rating && text) {
       dispatch(addCommentAction({rating: parseInt(rating, 10), comment: text, movieId: parseInt(movieId, 10)}));
       dispatch(fetchMovieCommentsAction({movieId: parseInt(movieId, 10)}));
-      dispatch(redirectToRoute(`/films/${movieId}`));
+      dispatch(redirectToRoute(`${APIRoute.Films}/${movieId}`));
     }
   };
 

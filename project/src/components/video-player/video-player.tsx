@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef} from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { Film } from '../../types/film';
 
 type Props = {
@@ -14,6 +14,7 @@ const VideoPlayer: FC<Props> = (props) => {
   const { previewVideoLink, previewImage } = movie;
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
   useEffect(() => {
     if (videoRef.current === null) {
       return;
@@ -28,7 +29,7 @@ const VideoPlayer: FC<Props> = (props) => {
   }, [isPlaying]);
 
   return (
-    <video ref={videoRef} width={width} height={height} src={previewVideoLink} poster={previewImage} muted={muted} ></video>
+    <video ref={videoRef} width={width} height={height} src={previewVideoLink} poster={previewImage} muted={muted}/>
   );
 };
 

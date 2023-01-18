@@ -1,33 +1,20 @@
-import { FC, useEffect, useState } from 'react';
-import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/action';
+import { fetchMovieAction, fetchMovieCommentsAction, fetchSimilarMoviesAction } from '../../store/api-actions';
 import Footer from '../../components/footer/footer';
 import Movie from '../../components/movie/movie';
-import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
-import Overview from '../../components/tabs/overview/overview';
-import Details from '../../components/tabs/details/details';
-import Reviews from '../../components/tabs/reviews/reviews';
-import { MoviePageType } from '../../types/movie-page.enum';
 import PageNotFound from '../page-not-found/page-not-found';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { useParams } from 'react-router-dom';
-import { fetchMovieAction, fetchMovieCommentsAction, fetchSimilarMoviesAction } from '../../store/api-actions';
-import { redirectToRoute } from '../../store/action';
-import Header from "../../components/header/header";
-import MovieInfo from "../../components/movie/movie-info";
-import Navigation from "../../components/tabs/navigation";
+import Header from '../../components/header/header';
+import MovieInfo from '../../components/movie/movie-info';
+import Navigation from '../../components/tabs/navigation';
 
-export type Props = {
-  filmCount: number;
-  moviePageType: MoviePageType;
-  isInList?: boolean;
-}
-
-const MoviePage: FC<Props> = (props) => {
-  const { filmCount, moviePageType, isInList } = props;
+const MoviePage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+
   if (!id || !parseInt(id, 10)) {
     dispatch(redirectToRoute('/error404'));
   }
@@ -36,13 +23,20 @@ const MoviePage: FC<Props> = (props) => {
     if (id === undefined) {
       return;
     }
-    const movieId = parseInt(id!, 10);
+
+    const movieId = parseInt(id, 10);
     dispatch(fetchMovieAction({movieId: movieId}));
     dispatch(fetchMovieCommentsAction({movieId: movieId}));
     dispatch(fetchSimilarMoviesAction({movieId: movieId}));
   }, [id, dispatch]);
 
-  const { currentMovie, similarMovies, isMovieLoading, isCommentsLoading, isSimilarMoviesLoading } = useAppSelector((state) => state);
+  const {
+    currentMovie,
+    similarMovies,
+    isMovieLoading,
+    isCommentsLoading,
+    isSimilarMoviesLoading
+  } = useAppSelector((state) => state);
 
   if (isMovieLoading || isCommentsLoading || isSimilarMoviesLoading) {
     return <LoadingScreen/>;
@@ -63,7 +57,7 @@ const MoviePage: FC<Props> = (props) => {
           <h1 className="visually-hidden">WTW</h1>
           <Header/>
           <div className="film-card__wrap">
-            <MovieInfo name={name} genre={genre} released={released} filmCount={filmCount} isInList={isInList} addReview/>
+            <MovieInfo name={name} genre={genre} released={released} addReview/>
           </div>
         </div>
         <div className="film-card__wrap film-card__translate-top">
@@ -71,7 +65,7 @@ const MoviePage: FC<Props> = (props) => {
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
-            <Navigation moviePageType={moviePageType} currentMovie={currentMovie}/>
+            <Navigation currentMovie={currentMovie}/>
           </div>
         </div>
       </section>

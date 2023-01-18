@@ -11,12 +11,16 @@ const SignInInputs: FC<Props> = (props) => {
   const { type, loginRef, passwordRef } = props;
   return (
     <div className="sign-in__fields">
-      <div className={`sign-in__field${type === SignInType.Error ? ' sign-in__field--error' : ''}`}>
-        <input className="sign-in__input" type="text" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
+      <div className={`sign-in__field${type === SignInType.IncorrectEmail ? ' sign-in__field--error' : ''}`}>
+        <input className="sign-in__input" type="text" placeholder="Email address" name="user-email"
+          id="user-email" ref={loginRef}
+        />
         <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
       </div>
-      <div className={`sign-in__field${type === SignInType.Message ? ' sign-in__field--error' : ''}`}>
-        <input className="sign-in__input" type="text" placeholder="Password" name="user-password" id="user-password" ref={passwordRef}/>
+      <div className={`sign-in__field${type === SignInType.IncorrectPassword ? ' sign-in__field--error' : ''}`}>
+        <input className="sign-in__input" type="text" placeholder="Password" name="user-password"
+          id="user-password" ref={passwordRef}
+        />
         <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
       </div>
     </div>

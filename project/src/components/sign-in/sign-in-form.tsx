@@ -1,14 +1,14 @@
 import { FC, FormEvent, useRef, useState } from 'react';
 import { SignInType } from '../../types/sign-in-type.enum';
-import SignInMessage from './sign-in-message';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import SignInInputs from './sign-in-inputs';
+import SignInMessage from './sign-in-message';
+import { emailIsValid, passwordIsValid } from '../../common/common-functions';
 
 const SignInForm: FC = () => {
   const [pageType, setPageType] = useState(SignInType.Regular);
-  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -21,14 +21,17 @@ const SignInForm: FC = () => {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (loginRef.current === null || !loginRef.current.value.match(validRegex)) {
-      setPageType(SignInType.Error);
+
+    if (loginRef.current === null || !emailIsValid(loginRef.current.value)) {
+      setPageType(SignInType.IncorrectEmail);
       return;
     }
-    if (passwordRef.current === null || !(/\d/.test(passwordRef.current.value) && /[a-zA-Z]/.test(passwordRef.current.value))) {
-      setPageType(SignInType.Message);
+
+    if (passwordRef.current === null || !passwordIsValid(passwordRef.current.value)) {
+      setPageType(SignInType.IncorrectPassword);
       return;
     }
+
     onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,

@@ -4,7 +4,7 @@ import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { ToastContainer } from 'react-toastify';
-import {checkAuthAction, fetchMoviesAction, fetchPromoMovieAction} from './store/api-actions';
+import { checkAuthAction, fetchMoviesAction, fetchPromoMovieAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(fetchMoviesAction());
@@ -19,7 +19,7 @@ root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ToastContainer />
-      <App myMovies={[]}/>
+      <App/>
     </Provider>
   </React.StrictMode>,
 );

@@ -7,9 +7,12 @@ type Props = {
 
 const Star: FC<Props> = (props) => {
   const { handleInputChange, rate } = props;
+
   return (
     <>
-      <input onChange={handleInputChange} className="rating__input" id={`star-${rate}`} type="radio" name="rating" value={rate.toString()}/>
+      <input onChange={handleInputChange} className="rating__input" id={`star-${rate}`} type="radio"
+        name="rating" value={rate.toString()}
+      />
       <label className="rating__label" htmlFor={`star-${rate}`}>`Rating ${rate}`</label>
     </>
   );

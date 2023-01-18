@@ -6,11 +6,13 @@ type Props = {
 }
 
 const ReviewTextarea: FC<Props> = (props) => {
-  const { handleInputChange } = props;
+  const { handleInputChange, text } = props;
 
   return (
     <div className="add-review__text">
-      <textarea maxLength={400} minLength={50} onChange={handleInputChange} className="add-review__textarea" name="text" id="text" placeholder="Review text"></textarea>
+      <textarea maxLength={400} minLength={50} onChange={handleInputChange} className="add-review__textarea"
+        name="text" id="text" placeholder="Review text" value={text}
+      />
       <div className="add-review__submit">
         <button className="add-review__btn" type="submit">Post</button>
       </div>
@@ -18,4 +20,5 @@ const ReviewTextarea: FC<Props> = (props) => {
   );
 };
 
-export default memo(ReviewTextarea, (prevProps, nextProps) => prevProps.text === nextProps.text);
+export default memo(ReviewTextarea, (prevProps, nextProps) =>
+  prevProps.text === nextProps.text);

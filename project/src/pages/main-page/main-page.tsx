@@ -1,30 +1,24 @@
-import {FC, useEffect, useState} from 'react';
-import Footer from '../../components/footer/footer';
+import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import Footer from '../../components/footer/footer';
 import { resetMoviePage } from '../../store/action';
-import Header from "../../components/header/header";
-import MovieInfo from "../../components/movie/movie-info";
-import Genres from "../../components/catalog/genres";
-import Movies from "../../components/catalog/movies";
+import Header from '../../components/header/header';
+import MovieInfo from '../../components/movie/movie-info';
+import Genres from '../../components/catalog/genres';
+import Movies from '../../components/catalog/movies';
 
-type Props = {
-  filmCount: number;
-  isInList?: boolean;
-}
-
-const MainPage: FC<Props> = (props) => {
-  const { filmCount, isInList } = props;
+const MainPage: FC = () => {
   const [, setActiveMovie] = useState<number | null>(null);
 
   const { currentMovies, moviesCount, promoMovie, allGenres } = useAppSelector((state) => state);
+
+  const { backgroundImage, name, genre, posterImage, released } = promoMovie;
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(resetMoviePage());
   }, [dispatch]);
-
-  const {backgroundImage, name, genre, posterImage, released} = promoMovie;
 
   return (
     <>
@@ -39,7 +33,7 @@ const MainPage: FC<Props> = (props) => {
             <div className="film-card__poster">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
-            <MovieInfo name={name} genre={genre} released={released} filmCount={filmCount} isInList={isInList}/>
+            <MovieInfo name={name} genre={genre} released={released}/>
           </div>
         </div>
       </section>

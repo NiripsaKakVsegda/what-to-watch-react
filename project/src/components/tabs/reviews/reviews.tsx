@@ -8,7 +8,11 @@ const Reviews: FC = () => {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {comments.map((comment) => <Review review={comment} key={`review-${comment.user.name}-${comment.rating}`}/>)}
+        {
+          comments.map((comment) =>
+            <Review review={comment} key={`review-${comment.user.name}-${comment.rating}`}/>
+          )
+        }
       </div>
     </div>
   );

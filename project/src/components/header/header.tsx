@@ -1,7 +1,7 @@
-import {FC} from "react";
-import Logo from "../logo/logo";
-import UserBlock from "../user-block/user-block";
-import ReviewHeader from "./review-header";
+import { FC } from 'react';
+import Logo from '../logo/logo';
+import UserBlock from '../user-block/user-block';
+import ReviewHeader from './review-header';
 
 type Props = {
   id?: string;
@@ -9,7 +9,8 @@ type Props = {
 }
 
 const Header: FC<Props> = (props) => {
-  const {id, name} = props;
+  const { id, name } = props;
+
   return (
     <header className="page-header film-card__head">
       <Logo/>

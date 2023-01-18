@@ -3,5 +3,6 @@ export enum Loading {
   MOVIE = 'movie',
   COMMENTS = 'comments',
   SIMILAR = 'similar',
-  PROMO = 'promo'
+  PROMO = 'promo',
+  FAVORITE = 'favorite'
 }

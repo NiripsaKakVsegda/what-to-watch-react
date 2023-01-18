@@ -1,47 +1,58 @@
-import { FC } from 'react';
+import {FC, useRef, useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import PlayButton from '../../components/play-button/play-button';
-import {FindMovieById, getDuration} from '../../common/common-functions';
 import PageNotFound from '../page-not-found/page-not-found';
+import Progress from '../../components/progress/progress';
+import LoadingScreen from '../loading-screen/loading-screen';
+import FullScreenButton from '../../components/full-screen-button/full-screen-button';
+import { Duration } from '../../types/duration';
+import { useFindMovieById, getDuration } from '../../common/common-functions';
+import { APIRoute } from '../../types/api-route.enum';
+import { MockFilm } from '../../common/mock';
 
-type Props = {
-  playerName: string;
-  isPause?: boolean;
-}
-
-const PlayerPage: FC<Props> = (props) => {
-  const { playerName, isPause } = props;
+const PlayerPage: FC = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const { id } = useParams();
-  const movie = FindMovieById(id);
-  if (!movie) {
+  const foundMovie = useFindMovieById(id);
+  const movie = foundMovie ?? MockFilm;
+  const { backgroundImage, videoLink, runTime } = movie;
+
+  const [progress, setProgress] = useState(0);
+  const [timeLeft, setTimeLeft] = useState<Duration>(getDuration(runTime * 60));
+
+  const {isMovieLoading} = useAppSelector((state) => state);
+  if (isMovieLoading) {
+    return <LoadingScreen/>;
+  }
+  if (!foundMovie) {
     return (<PageNotFound></PageNotFound>);
   }
-  const { runTime } = movie;
-  const duration = getDuration(runTime);
+
+  const handleProgress = () => {
+    if (videoRef.current === null) {
+      return;
+    }
+
+    setProgress((videoRef.current.currentTime / videoRef.current.duration) * 100);
+    const left = Math.floor(videoRef.current.duration - videoRef.current.currentTime);
+    setTimeLeft(getDuration(left));
+  };
 
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
-      <Link to={`/films/${movie.id}`}>
+      <video onTimeUpdate={handleProgress} preload="metadata" ref={videoRef} src={videoLink}
+        className="player__video" poster={backgroundImage}
+      />
+      <Link to={`${APIRoute.Films}/${movie.id}`}>
         <button type="button" className="player__exit">Exit</button>
       </Link>
       <div className="player__controls">
+        <Progress timeLeft={timeLeft} progress={progress} style={{left: `${progress}%`}}/>
         <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
-          </div>
-          <div className="player__time-value">{`${duration.hours}:${duration.minutes}`}</div>
-        </div>
-        <div className="player__controls-row">
-          <PlayButton isPause={isPause}/>
-          <div className="player__name">{playerName}</div>
-          <button type="button" className="player__full-screen">
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
-            </svg>
-            <span>Full screen</span>
-          </button>
+          <PlayButton videoRef={videoRef}/>
+          <div className="player__name">Transpotting</div>
+          <FullScreenButton videoRef={videoRef}/>
         </div>
       </div>
     </div>

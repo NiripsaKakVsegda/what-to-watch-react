@@ -10,7 +10,7 @@ import {
   resetShowMore,
   setDataLoadedStatus,
   showMore,
-  updateMoviesByGenre
+  updateMoviesByGenre, userLogout
 } from './action';
 import { Film } from '../types/film';
 import { AuthStatus } from '../types/auth-status.enum';
@@ -126,6 +126,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getMyMovies, (state, action) => {
       state.favorite = action.payload;
+    })
+    .addCase(userLogout, (state, _action) => {
+      state.favorite = [];
     });
 });
 

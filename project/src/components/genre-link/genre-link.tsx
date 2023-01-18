@@ -1,6 +1,8 @@
 import { FC, memo } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, resetShowMore, updateMoviesByGenre } from '../../store/action';
+import { APIRoute } from '../../types/api-route.enum';
 
 type Props = {
   currentGenre: string;
@@ -26,7 +28,7 @@ const GenreLink: FC<Props> = (props) => {
 
   return (
     <li className={className}>
-      <p onClick={onLinkClick} className="catalog__genres-link">{currentGenre}</p>
+      <Link onClick={onLinkClick} to={APIRoute.Main} className="catalog__genres-link">{currentGenre}</Link>
     </li>
   );
 };

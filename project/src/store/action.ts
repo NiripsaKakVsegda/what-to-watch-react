@@ -26,3 +26,5 @@ export const requireAuthorization = createAction<AuthStatus>('user/requireAuthor
 export const redirectToRoute = createAction<string>('movies/redirectToRoute');
 
 export const getMyMovies = createAction<Film[]>('user/favorite');
+
+export const userLogout = createAction('user/logout');

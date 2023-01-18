@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../types/state.js';
 import {
   loadComments,
   loadMovie,
-  loadMovies,
+  loadMovies, loadPromoMovie,
   loadSimilarMovies,
   redirectToRoute,
   requireAuthorization,
@@ -45,10 +45,8 @@ export const fetchSimilarMoviesAction = createAsyncThunk<void, {movieId: number}
     dispatch(setDataLoadedStatus({loadType: Loading.SIMILAR, isLoading: true}));
     const {data} = await api.get<Film[]>(`films/${movieId}/similar`);
 
-    console.log('fetch: is loading similar true');
     dispatch(loadSimilarMovies(data));
     dispatch(setDataLoadedStatus({loadType: Loading.SIMILAR, isLoading: false}));
-    console.log('fetch: is loading similar false');
   },
 );
 
@@ -62,10 +60,23 @@ export const fetchMovieAction = createAsyncThunk<void, {movieId: number}, {
     dispatch(setDataLoadedStatus({loadType: Loading.MOVIE, isLoading: true}));
     const {data} = await api.get<Film>(`films/${movieId}`);
 
-    console.log('fetch: is loading movie true');
     dispatch(loadMovie(data));
     dispatch(setDataLoadedStatus({loadType: Loading.MOVIE, isLoading: false}));
-    console.log('fetch: is loading movie false');
+  },
+);
+
+export const fetchPromoMovieAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPromoMovie',
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setDataLoadedStatus({loadType: Loading.PROMO, isLoading: true}));
+    const {data} = await api.get<Film>(`promo`);
+
+    dispatch(loadPromoMovie(data));
+    dispatch(setDataLoadedStatus({loadType: Loading.PROMO, isLoading: false}));
   },
 );
 
@@ -79,10 +90,8 @@ export const fetchMovieCommentsAction = createAsyncThunk<void, MovieData, {
     dispatch(setDataLoadedStatus({loadType: Loading.COMMENTS, isLoading: true}));
     const {data} = await api.get<UserReview[]>(`comments/${movieId}`);
 
-    console.log('fetch: is loading comments true');
     dispatch(loadComments(data));
     dispatch(setDataLoadedStatus({loadType: Loading.COMMENTS, isLoading: false}));
-    console.log('fetch: is loading comments false');
   },
 );
 

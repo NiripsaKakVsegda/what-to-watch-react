@@ -1,29 +1,35 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import { changeGenre, resetShowMore, updateMoviesByGenre } from '../../store/action';
 
 type Props = {
-  genre: string;
+  currentGenre: string;
 }
 
 const GenreLink: FC<Props> = (props) => {
-  const { genre } = props;
+  const { currentGenre } = props;
   const dispatch = useAppDispatch();
-
+  const { genre } = useAppSelector((state) => state);
+  let className;
+  if (currentGenre === genre) {
+    className = 'catalog__genres-item catalog__genres-item--active';
+  } else {
+    className = 'catalog__genres-item';
+  }
   return (
-    <li className="catalog__genres-item">
+    <li className={className}>
       <Link onClick={
         () => {
-          dispatch(changeGenre(genre));
+          dispatch(changeGenre(currentGenre));
           dispatch(updateMoviesByGenre());
           dispatch(resetShowMore());
         }
       } to={'/'} className="catalog__genres-link"
-      >{genre}
+      >{currentGenre}
       </Link>
     </li>
   );
 };
 
-export default GenreLink;
+export default memo(GenreLink);

@@ -24,9 +24,9 @@ const App: FC<Props> = (props) => {
   const { myMovies } = props;
   const isInList = false;
 
-  const { authStatus, isMoviesLoading, movies } = useAppSelector((state) => state);
+  const { authStatus, isMoviesLoading, isPromoMovieLoading, movies, promoMovie } = useAppSelector((state) => state);
 
-  if (isCheckedAuth(authStatus) || isMoviesLoading || !movies.length) {
+  if (isCheckedAuth(authStatus) || isMoviesLoading || isPromoMovieLoading || !movies.length || promoMovie === null) {
     return (
       <LoadingScreen />
     );
@@ -54,7 +54,9 @@ const App: FC<Props> = (props) => {
         }
         />
         <Route path={'/films/:id/review'} element={
-          <AddReviewPage/>
+          <PrivateRoute authStatus={authStatus}>
+            <AddReviewPage/>
+          </PrivateRoute>
         }
         />
         <Route path={'/player/:id'} element={

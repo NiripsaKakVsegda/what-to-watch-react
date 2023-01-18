@@ -16,6 +16,7 @@ export const resetMoviePage = createAction('movies/resetPage');
 
 export const loadMovies = createAction<Film[]>('data/loadMovies');
 export const loadMovie = createAction<Film>('data/loadMovie');
+export const loadPromoMovie = createAction<Film>('data/loadPromoMovie');
 export const loadSimilarMovies = createAction<Film[]>('data/loadSimilarMovies');
 export const loadComments = createAction<UserReview[]>('data/loadComments');
 export const setDataLoadedStatus = createAction<DataLoadType>('data/setDataLoadedStatus');

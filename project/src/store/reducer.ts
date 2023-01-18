@@ -3,7 +3,7 @@ import {
   changeGenre,
   loadComments,
   loadMovie,
-  loadMovies,
+  loadMovies, loadPromoMovie,
   loadSimilarMovies,
   requireAuthorization,
   resetMoviePage,
@@ -16,10 +16,9 @@ import {Film} from '../types/film';
 import {AuthStatus} from '../types/auth-status.enum';
 import {UserReview} from '../types/user-review';
 import {Loading} from '../types/loading.enum';
+import {MockFilm} from '../common/mock';
 
 const MOVIE_COUNT_STEP = 8;
-const MOVIES_COUNT = 25;
-const getRandomMovieId = () => Math.floor(Math.random() * MOVIES_COUNT) + 1;
 
 type InitialState = {
   genre: string;
@@ -27,14 +26,15 @@ type InitialState = {
   movies: Film[];
   currentMovies: Film[];
   similarMovies: Film[];
-  currentMovie: Film | null;
+  currentMovie: Film;
+  promoMovie: Film;
   moviesCount: number;
   isMoviesLoading: boolean;
   isMovieLoading: boolean;
   isCommentsLoading: boolean;
   isSimilarMoviesLoading: boolean;
+  isPromoMovieLoading: boolean;
   authStatus: AuthStatus;
-  mainMovieId: number;
   comments: UserReview[];
 }
 
@@ -42,16 +42,17 @@ const initialState: InitialState = {
   genre: 'All genres',
   allGenres: ['All genres'],
   similarMovies: [],
-  currentMovie: null,
+  currentMovie: MockFilm,
   movies: [],
   currentMovies: [],
+  promoMovie: MockFilm,
   moviesCount: MOVIE_COUNT_STEP,
   isMoviesLoading: false,
   isMovieLoading: false,
   isCommentsLoading: false,
   isSimilarMoviesLoading: false,
+  isPromoMovieLoading: false,
   authStatus: AuthStatus.UNKNOWN,
-  mainMovieId: getRandomMovieId(),
   comments: []
 };
 
@@ -80,7 +81,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.currentMovies = state.movies;
       state.moviesCount = initialState.moviesCount;
       state.comments = initialState.comments;
-      state.mainMovieId = getRandomMovieId();
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authStatus = action.payload;
@@ -99,6 +99,10 @@ const reducer = createReducer(initialState, (builder) => {
           return;
         case Loading.SIMILAR:
           state.isSimilarMoviesLoading = isLoading;
+          return;
+        case Loading.PROMO:
+          state.isPromoMovieLoading = isLoading;
+          return;
       }
     })
     .addCase(loadMovies, (state, action) => {
@@ -109,15 +113,15 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadMovie, (state, action) => {
       state.currentMovie = action.payload;
-      console.log('loaded movie');
+    })
+    .addCase(loadPromoMovie, (state, action) => {
+      state.promoMovie = action.payload;
     })
     .addCase(loadSimilarMovies, (state, action) => {
       state.similarMovies = action.payload;
-      console.log('loaded similar');
     })
     .addCase(loadComments, (state, action) => {
       state.comments = action.payload;
-      console.log('loaded comments');
     });
 });
 

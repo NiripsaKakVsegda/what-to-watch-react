@@ -14,6 +14,9 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { useParams } from 'react-router-dom';
 import { fetchMovieAction, fetchMovieCommentsAction, fetchSimilarMoviesAction } from '../../store/api-actions';
 import { redirectToRoute } from '../../store/action';
+import Header from "../../components/header/header";
+import MovieInfo from "../../components/movie/movie-info";
+import Navigation from "../../components/tabs/navigation";
 
 export type Props = {
   filmCount: number;
@@ -23,7 +26,6 @@ export type Props = {
 
 const MoviePage: FC<Props> = (props) => {
   const { filmCount, moviePageType, isInList } = props;
-  const [pageType, setPageType] = useState(moviePageType);
   const { id } = useParams();
   const dispatch = useAppDispatch();
   if (!id || !parseInt(id, 10)) {
@@ -31,7 +33,9 @@ const MoviePage: FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line
+    if (id === undefined) {
+      return;
+    }
     const movieId = parseInt(id!, 10);
     dispatch(fetchMovieAction({movieId: movieId}));
     dispatch(fetchMovieCommentsAction({movieId: movieId}));
@@ -45,7 +49,6 @@ const MoviePage: FC<Props> = (props) => {
   }
 
   if (!currentMovie) {
-    console.log('not found');
     return (<PageNotFound></PageNotFound>);
   }
   const { name, released, backgroundImage, posterImage, genre } = currentMovie;
@@ -58,46 +61,17 @@ const MoviePage: FC<Props> = (props) => {
             <img src={backgroundImage} alt={name}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header film-card__head">
-            <Logo/>
-            <UserBlock/>
-          </header>
+          <Header/>
           <div className="film-card__wrap">
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{released}</span>
-              </p>
-              <FilmCardButtons filmCardCount={filmCount} isInList={isInList} addReview/>
-            </div>
+            <MovieInfo name={name} genre={genre} released={released} filmCount={filmCount} isInList={isInList} addReview/>
           </div>
         </div>
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={posterImage} alt={`${name} poster`} width="218"
-                height="327"
-              />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  {
-                    Object.values(MoviePageType).map((currentPageType) =>
-                      (
-                        <li key={currentPageType} className={`film-nav__item${pageType === currentPageType ? ' film-nav__item--active' : ''}`}>
-                          <div style={{cursor: 'pointer'}} onClick={() => setPageType(currentPageType)} className="film-nav__link">{currentPageType}</div>
-                        </li>
-                      )
-                    )
-                  }
-                </ul>
-              </nav>
-              {pageType === MoviePageType.OverviewPage && <Overview movie={currentMovie} />}
-              {pageType === MoviePageType.DetailsPage && <Details movie={currentMovie}/>}
-              {pageType === MoviePageType.ReviewsPage && <Reviews/>}
-            </div>
+            <Navigation moviePageType={moviePageType} currentMovie={currentMovie}/>
           </div>
         </div>
       </section>

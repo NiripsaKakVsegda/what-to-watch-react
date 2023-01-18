@@ -2,17 +2,17 @@ import { AuthStatus } from '../types/auth-status.enum';
 import { Film } from '../types/film';
 import { useAppSelector } from '../hooks';
 import { UserReview } from '../types/user-review';
-import {Duration} from '../types/duration';
+import { Duration } from '../types/duration';
 
 export const isCheckedAuth = (authStatus: AuthStatus): boolean =>
   authStatus === AuthStatus.UNKNOWN;
 
 export const FindMovieById = (id: string | undefined): Film | undefined => {
-  if (!id || !parseInt(id)) {
+  const { movies } = useAppSelector((state) => state);
+  if (!id || !parseInt(id, 10)) {
     return undefined;
   }
-  const parsedId = parseInt(id);
-  const { movies } = useAppSelector((state) => state);
+  const parsedId = parseInt(id, 10);
   const movie = movies.find((currentMovie) => currentMovie.id === parsedId);
 
   return movie ?? undefined;
@@ -45,5 +45,10 @@ export const getDuration = (duration: number): Duration => {
   return {
     hours: hours,
     minutes: minutes
-  }
+  };
 };
+
+export const getDate = (date: string): string => {
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}

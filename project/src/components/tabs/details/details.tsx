@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Film } from '../../../types/film';
-import {getDuration} from "../../../common/common-functions";
+import { getDuration } from '../../../common/common-functions';
 
 type Props = {
   movie: Film;

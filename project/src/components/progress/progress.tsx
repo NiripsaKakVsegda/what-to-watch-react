@@ -9,7 +9,7 @@ type Props = {
 
 const Progress: FC<Props> = (props) => {
   const { progress, timeLeft, style } = props;
-  const hours = timeLeft.hours === 0 ? '' : timeLeft.hours;
+  const hours = timeLeft.hours === 0 ? '' : `${timeLeft.hours}:`;
   const minutes = timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes;
   const seconds = timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds;
 

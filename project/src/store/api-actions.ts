@@ -9,7 +9,7 @@ import {
   loadSimilarMovies,
   redirectToRoute,
   requireAuthorization,
-  setDataLoadedStatus
+  setDataLoadedStatus, userLogout
 } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { AuthStatus } from '../types/auth-status.enum';
@@ -172,5 +172,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthStatus.NO_AUTH));
+    dispatch(userLogout());
   },
 );

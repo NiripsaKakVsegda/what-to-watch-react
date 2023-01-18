@@ -1,6 +1,9 @@
 import { FC, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoriteAction, updateMovieInMyList } from '../../store/api-actions';
+import { AuthStatus } from '../../types/auth-status.enum';
+import { redirectToRoute } from '../../store/action';
+import { APIRoute } from '../../types/api-route.enum';
 
 const inList = {
   href: '#in-list',
@@ -20,7 +23,7 @@ type Props = {
 
 const InListButton: FC<Props> = (props) => {
   const { movieId } = props;
-  const { favorite } = useAppSelector((state) => state);
+  const { favorite, authStatus } = useAppSelector((state) => state);
 
   const isInList = favorite.findIndex((x) => x.id === movieId) !== -1;
   const [buttonType, setButtonType] = useState(isInList ? inList : add);
@@ -28,6 +31,10 @@ const InListButton: FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
   const onButtonClick = () => {
+    if (authStatus !== AuthStatus.AUTH) {
+      dispatch(redirectToRoute(APIRoute.Login));
+    }
+
     const status = buttonType === add ? 1 : 0;
     dispatch(updateMovieInMyList({movieId: movieId, status: status }))
       .then(() => dispatch(fetchFavoriteAction()))

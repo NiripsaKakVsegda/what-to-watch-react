@@ -8,7 +8,8 @@ type Props = {
 
 const Details: FC<Props> = (props) => {
   const { director, starring, runTime, genre, released } = props.movie;
-  const duration = getDuration(runTime);
+  const duration = getDuration(runTime * 60);
+
 
   return (
     <div className="film-card__text film-card__row">

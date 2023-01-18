@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MutableRefObject, useState } from 'react';
 
 const play = {
   name: 'Play',
@@ -15,15 +15,31 @@ const pause = {
 };
 
 type Props = {
-  isPause?: boolean;
+  videoRef: MutableRefObject<HTMLVideoElement | null>;
 }
 
 const PlayButton: FC<Props> = (props) => {
-  const { isPause } = props;
-  const buttonInfo = isPause ? pause : play;
+  const { videoRef } = props;
+  const [buttonInfo, setButtonInfo] = useState(play);
+
+  if (videoRef.current !== null) {
+    videoRef.current.onended = () => setButtonInfo(play);
+  }
+
+  const onClick = () => {
+    if (videoRef.current !== null) {
+      if (buttonInfo.name === 'Pause') {
+        videoRef.current.pause();
+        setButtonInfo(play);
+      } else {
+        videoRef.current.play();
+        setButtonInfo(pause);
+      }
+    }
+  };
 
   return (
-    <button type="button" className="player__play">
+    <button type="button" className="player__play" onClick={onClick}>
       <svg viewBox={`0 0 ${buttonInfo.width} ${buttonInfo.height}`} width={buttonInfo.width} height={buttonInfo.height}>
         <use xlinkHref={buttonInfo.href}></use>
       </svg>

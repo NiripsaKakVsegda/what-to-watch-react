@@ -7,13 +7,17 @@ type Props = {
 
 const SignInMessage: FC<Props> = (props) => {
   const { type } = props;
+
   if (type === SignInType.Regular) {
     return null;
   }
 
   return (
     <div className="sign-in__message">
-      <p>{type === SignInType.Error ? 'Please enter a valid email address' : 'Password should contain 1 letter and 1 number'}</p>
+      <p>{type === SignInType.IncorrectEmail ?
+        'Please enter a valid email address'
+        : 'Password should contain 1 letter and 1 number'}
+      </p>
     </div>
   );
 };

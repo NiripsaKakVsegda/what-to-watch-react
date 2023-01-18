@@ -1,9 +1,10 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Film } from '../../types/film';
 import VideoPlayer from '../video-player/video-player';
-import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
+import { APIRoute } from '../../types/api-route.enum';
 
 type Props = {
   movie: Film;
@@ -44,12 +45,14 @@ const Movie: FC<Props> = (props) => {
   const handleOnClick = () => dispatch(redirectToRoute(`/films/${id}`));
 
   return (
-    <article style={{cursor: 'pointer'}} className="small-film-card catalog__films-card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleOnClick}>
+    <article style={{cursor: 'pointer'}} className="small-film-card catalog__films-card"
+      onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleOnClick}
+    >
       <div className="small-film-card__image">
         <VideoPlayer movie={movie} muted width={280} height={175} isPlaying={isPlaying}/>
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${id}`} className="small-film-card__link">{name}</Link>
+        <Link to={`${APIRoute.Films}/${id}`} className="small-film-card__link">{name}</Link>
       </h3>
     </article>
   );

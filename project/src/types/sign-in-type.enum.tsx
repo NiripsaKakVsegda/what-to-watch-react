@@ -1,5 +1,5 @@
 export enum SignInType {
   Regular,
-  Error,
-  Message
+  IncorrectEmail,
+  IncorrectPassword
 }

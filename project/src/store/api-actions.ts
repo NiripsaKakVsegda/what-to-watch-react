@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import {
+  getMyMovies,
   loadComments,
   loadMovie,
   loadMovies, loadPromoMovie,
@@ -21,6 +22,17 @@ import { UserReview } from '../types/user-review';
 import { CommentData } from '../types/comment-data';
 import { Loading } from '../types/loading.enum';
 
+export const updateMovieInMyList = createAsyncThunk<void, {movieId: number; status: number}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/updateMovieInMyList',
+  async ({movieId, status}, {extra: api}) => {
+    await api.post(`favorite/${movieId}/${status}`);
+  },
+);
+
 export const fetchMoviesAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -32,6 +44,20 @@ export const fetchMoviesAction = createAsyncThunk<void, undefined, {
     dispatch(setDataLoadedStatus({loadType: Loading.MOVIES, isLoading: true}));
     dispatch(loadMovies(data));
     dispatch(setDataLoadedStatus({loadType: Loading.MOVIES, isLoading: false}));
+  },
+);
+
+export const fetchFavoriteAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchMovies',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film[]>('/favorite');
+    dispatch(setDataLoadedStatus({loadType: Loading.FAVORITE, isLoading: true}));
+    dispatch(getMyMovies(data));
+    dispatch(setDataLoadedStatus({loadType: Loading.FAVORITE, isLoading: false}));
   },
 );
 
@@ -73,7 +99,7 @@ export const fetchPromoMovieAction = createAsyncThunk<void, undefined, {
   'data/fetchPromoMovie',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setDataLoadedStatus({loadType: Loading.PROMO, isLoading: true}));
-    const {data} = await api.get<Film>(`promo`);
+    const {data} = await api.get<Film>('promo');
 
     dispatch(loadPromoMovie(data));
     dispatch(setDataLoadedStatus({loadType: Loading.PROMO, isLoading: false}));
@@ -101,7 +127,7 @@ export const addCommentAction = createAsyncThunk<void, CommentData, {
   extra: AxiosInstance;
 }>(
   'data/addComment',
-  async ({comment, rating, movieId}, {dispatch, extra: api}) => {
+  async ({comment, rating, movieId}, {extra: api}) => {
     await api.post<{comment: string; rating: number}[]>(`comments/${movieId}`, {comment, rating});
   },
 );

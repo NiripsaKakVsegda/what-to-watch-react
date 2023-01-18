@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { Film } from '../types/film';
 import { AuthStatus } from '../types/auth-status.enum';
 import { UserReview } from '../types/user-review';
-import {DataLoadType} from '../types/data-load';
+import { DataLoadType } from '../types/data-load';
 
 export const changeGenre = createAction<string>('movies/changeGenre');
 
@@ -24,3 +24,5 @@ export const setDataLoadedStatus = createAction<DataLoadType>('data/setDataLoade
 export const requireAuthorization = createAction<AuthStatus>('user/requireAuthorization');
 
 export const redirectToRoute = createAction<string>('movies/redirectToRoute');
+
+export const getMyMovies = createAction<Film[]>('user/favorite');

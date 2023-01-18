@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { UserReview } from '../../types/user-review';
-import { getDate } from "../../common/common-functions";
+import { getDate } from '../../common/common-functions';
 
 type Props = {
   review: UserReview;

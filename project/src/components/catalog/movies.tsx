@@ -1,4 +1,4 @@
-import {Dispatch, FC, SetStateAction} from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import Movie from '../movie/movie';
 import ShowMore from '../show-more/show-more';
 import { Film } from '../../types/film';
@@ -15,10 +15,11 @@ const Movies: FC<Props> = (props) => {
   return (
     <>
       <div className="catalog__films-list">
-        {currentMovies.slice(0, moviesCount).map((currentMovie) =>
-          (
+        {
+          currentMovies.slice(0, moviesCount).map((currentMovie) =>
             <Movie key={currentMovie.id} setActiveMovie={setActiveMovie} movie={currentMovie}/>
-          ))}
+          )
+        }
       </div>
       {currentMovies.length > moviesCount && <ShowMore/>}
     </>

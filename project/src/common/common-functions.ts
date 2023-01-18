@@ -1,13 +1,11 @@
 import { AuthStatus } from '../types/auth-status.enum';
 import { Film } from '../types/film';
 import { useAppSelector } from '../hooks';
-import { UserReview } from '../types/user-review';
 import { Duration } from '../types/duration';
 
-export const isCheckedAuth = (authStatus: AuthStatus): boolean =>
-  authStatus === AuthStatus.UNKNOWN;
+export const isCheckedAuth = (authStatus: AuthStatus): boolean => authStatus === AuthStatus.UNKNOWN;
 
-export const FindMovieById = (id: string | undefined): Film | undefined => {
+export const useFindMovieById = (id: string | undefined): Film | undefined => {
   const { movies } = useAppSelector((state) => state);
   if (!id || !parseInt(id, 10)) {
     return undefined;
@@ -17,12 +15,6 @@ export const FindMovieById = (id: string | undefined): Film | undefined => {
 
   return movie ?? undefined;
 };
-
-export const getRating = (reviews: UserReview[]): number =>
-  reviews
-    .map((review) => review.rating)
-    .reduce((prevValue, currentValue) =>
-      prevValue + currentValue) / reviews.length;
 
 export const getRatingString = (rate: number): string => {
   switch (true) {
@@ -40,15 +32,24 @@ export const getRatingString = (rate: number): string => {
 };
 
 export const getDuration = (duration: number): Duration => {
-  const hours = Math.floor(duration / 60);
-  const minutes = duration - hours * 60;
+  const hours = Math.floor(duration / 60 / 60);
+  const minutes = Math.floor((duration - hours * 60 * 60) / 60);
+  const seconds = duration - hours * 60 * 60 - minutes * 60;
   return {
     hours: hours,
-    minutes: minutes
+    minutes: minutes,
+    seconds: seconds
   };
 };
 
 export const getDate = (date: string): string => {
   const newDate = new Date(date);
   return newDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+};
+
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+export const emailIsValid = (email: string): boolean => !!email.match(emailRegex);
+
+const passwordRegex = [/\d/, /[a-zA-Z]/];
+export const passwordIsValid = (password: string): boolean =>
+  !!(password.match(passwordRegex[0]) && password.match(passwordRegex[1]));

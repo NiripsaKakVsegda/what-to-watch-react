@@ -1,18 +1,17 @@
-import {FC, useState} from "react";
-import {MoviePageType} from "../../types/movie-page.enum";
-import Overview from "./overview/overview";
-import Details from "./details/details";
-import Reviews from "./reviews/reviews";
-import {Film} from "../../types/film";
+import { FC, useState } from 'react';
+import { MoviePageType } from '../../types/movie-page.enum';
+import Overview from './overview/overview';
+import Details from './details/details';
+import Reviews from './reviews/reviews';
+import { Film } from '../../types/film';
 
 type Props = {
-  moviePageType: MoviePageType;
   currentMovie: Film;
 }
 
 const Navigation: FC<Props> = (props) => {
-  const {moviePageType, currentMovie} = props;
-  const [pageType, setPageType] = useState(moviePageType);
+  const { currentMovie } = props;
+  const [pageType, setPageType] = useState(MoviePageType.OverviewPage);
 
   return (
     <div className="film-card__desc">
@@ -21,15 +20,20 @@ const Navigation: FC<Props> = (props) => {
           {
             Object.values(MoviePageType).map((currentPageType) =>
               (
-                <li key={currentPageType} className={`film-nav__item${pageType === currentPageType ? ' film-nav__item--active' : ''}`}>
-                  <div style={{cursor: 'pointer'}} onClick={() => setPageType(currentPageType)} className="film-nav__link">{currentPageType}</div>
+                <li key={currentPageType} className={`film-nav__item${pageType === currentPageType
+                  ? ' film-nav__item--active' : ''}`}
+                >
+                  <div style={{cursor: 'pointer'}} onClick={() => setPageType(currentPageType)}
+                    className="film-nav__link"
+                  >{currentPageType}
+                  </div>
                 </li>
               )
             )
           }
         </ul>
       </nav>
-      {pageType === MoviePageType.OverviewPage && <Overview movie={currentMovie} />}
+      {pageType === MoviePageType.OverviewPage && <Overview movie={currentMovie}/>}
       {pageType === MoviePageType.DetailsPage && <Details movie={currentMovie}/>}
       {pageType === MoviePageType.ReviewsPage && <Reviews/>}
     </div>

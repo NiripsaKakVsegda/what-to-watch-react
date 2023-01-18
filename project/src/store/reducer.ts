@@ -1,6 +1,6 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import {
-  changeGenre,
+  changeGenre, getMyMovies,
   loadComments,
   loadMovie,
   loadMovies, loadPromoMovie,
@@ -12,11 +12,11 @@ import {
   showMore,
   updateMoviesByGenre
 } from './action';
-import {Film} from '../types/film';
-import {AuthStatus} from '../types/auth-status.enum';
-import {UserReview} from '../types/user-review';
-import {Loading} from '../types/loading.enum';
-import {MockFilm} from '../common/mock';
+import { Film } from '../types/film';
+import { AuthStatus } from '../types/auth-status.enum';
+import { UserReview } from '../types/user-review';
+import { Loading } from '../types/loading.enum';
+import { MockFilm } from '../common/mock';
 
 const MOVIE_COUNT_STEP = 8;
 
@@ -26,6 +26,7 @@ type InitialState = {
   movies: Film[];
   currentMovies: Film[];
   similarMovies: Film[];
+  favorite: Film[];
   currentMovie: Film;
   promoMovie: Film;
   moviesCount: number;
@@ -42,6 +43,7 @@ const initialState: InitialState = {
   genre: 'All genres',
   allGenres: ['All genres'],
   similarMovies: [],
+  favorite: [],
   currentMovie: MockFilm,
   movies: [],
   currentMovies: [],
@@ -102,7 +104,6 @@ const reducer = createReducer(initialState, (builder) => {
           return;
         case Loading.PROMO:
           state.isPromoMovieLoading = isLoading;
-          return;
       }
     })
     .addCase(loadMovies, (state, action) => {
@@ -122,6 +123,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadComments, (state, action) => {
       state.comments = action.payload;
+    })
+    .addCase(getMyMovies, (state, action) => {
+      state.favorite = action.payload;
     });
 });
 
